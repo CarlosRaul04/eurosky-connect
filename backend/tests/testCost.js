@@ -1,5 +1,5 @@
 // backend/testCost.js
-const costService = require('./services/costService');
+const costService = require('../services/costService');
 
 console.log('[Prueba] Generando contrato JSON para el motor C++...');
 

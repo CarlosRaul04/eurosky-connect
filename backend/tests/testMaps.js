@@ -1,5 +1,7 @@
-require('dotenv').config(); // Carga tu API Key
-const mapsService = require('./services/mapsService');
+const path = require('path');
+// Le decimos a dotenv exactamente dónde está el archivo .env (un nivel arriba)
+require('dotenv').config({ path: path.join(__dirname, '../.env') }); 
+const mapsService = require('../services/mapsService');
 
 console.log('[Prueba] Iniciando test del servicio de Google Maps...');
 
