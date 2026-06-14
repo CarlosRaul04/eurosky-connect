@@ -1,0 +1,17 @@
+[
+  { "iata": "LHR", "nombre": "Aeropuerto de Heathrow", "ciudad": "Londres", "pais": "Reino Unido", "latitud": 51.4700, "longitud": -0.4543, "terminalFeeEUR": 580 },
+  { "iata": "CDG", "nombre": "Aeropuerto Charles de Gaulle", "ciudad": "París", "pais": "Francia", "latitud": 49.0097, "longitud": 2.5479, "terminalFeeEUR": 480 },
+  { "iata": "FRA", "nombre": "Aeropuerto de Fráncfort", "ciudad": "Fráncfort", "pais": "Alemania", "latitud": 50.0333, "longitud": 8.5705, "terminalFeeEUR": 420 },
+  { "iata": "MUC", "nombre": "Aeropuerto de Múnich", "ciudad": "Múnich", "pais": "Alemania", "latitud": 48.3537, "longitud": 11.7861, "terminalFeeEUR": 390 },
+  { "iata": "MAD", "nombre": "Aeropuerto de Madrid-Barajas", "ciudad": "Madrid", "pais": "España", "latitud": 40.4983, "longitud": -3.5676, "terminalFeeEUR": 350 },
+  { "iata": "BCN", "nombre": "Aeropuerto Barcelona-El Prat", "ciudad": "Barcelona", "pais": "España", "latitud": 41.2974, "longitud": 2.0833, "terminalFeeEUR": 330 },
+  { "iata": "AMS", "nombre": "Aeropuerto Ámsterdam-Schiphol", "ciudad": "Ámsterdam", "pais": "Países Bajos", "latitud": 52.3105, "longitud": 4.7683, "terminalFeeEUR": 440 },
+  { "iata": "FCO", "nombre": "Aeropuerto Roma-Fiumicino", "ciudad": "Roma", "pais": "Italia", "latitud": 41.7999, "longitud": 12.2462, "terminalFeeEUR": 370 },
+  { "iata": "LIS", "nombre": "Aeropuerto de Lisboa", "ciudad": "Lisboa", "pais": "Portugal", "latitud": 38.7742, "longitud": -9.1342, "terminalFeeEUR": 290 },
+  { "iata": "VIE", "nombre": "Aeropuerto de Viena", "ciudad": "Viena", "pais": "Austria", "latitud": 48.1103, "longitud": 16.5697, "terminalFeeEUR": 360 },
+  { "iata": "ATH", "nombre": "Aeropuerto de Atenas", "ciudad": "Atenas", "pais": "Grecia", "latitud": 37.9363, "longitud": 23.9445, "terminalFeeEUR": 310 },
+  { "iata": "ZRH", "nombre": "Aeropuerto de Zúrich", "ciudad": "Zúrich", "pais": "Suiza", "latitud": 47.4582, "longitud": 8.5555, "terminalFeeEUR": 400 },
+  { "iata": "BRU", "nombre": "Aeropuerto de Bruselas", "ciudad": "Bruselas", "pais": "Bélgica", "latitud": 50.9010, "longitud": 4.4856, "terminalFeeEUR": 380 },
+  { "iata": "CPH", "nombre": "Aeropuerto de Copenhague", "ciudad": "Copenhague", "pais": "Dinamarca", "latitud": 55.6180, "longitud": 12.6508, "terminalFeeEUR": 360 },
+  { "iata": "WAW", "nombre": "Aeropuerto Varsovia Chopin", "ciudad": "Varsovia", "pais": "Polonia", "latitud": 52.1657, "longitud": 20.9671, "terminalFeeEUR": 270 }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "modelo": "Airbus A320neo",
+    "capacidad_max": 255,
+    "umbral_min": 179,
+    "mu_demanda": 204,
+    "sigma_demanda": 20,
+    "leasing_usd_hora": 1667,
+    "consumo_kg_km": 2.79,
+    "autonomia_km": 6300
+  },
+  {
+    "modelo": "Airbus A321neo",
+    "capacidad_max": 240,
+    "umbral_min": 168,
+    "mu_demanda": 192,
+    "sigma_demanda": 19,
+    "leasing_usd_hora": 2000,
+    "consumo_kg_km": 3.20,
+    "autonomia_km": 7400
+  },
+  {
+    "modelo": "Boeing 737 MAX 8",
+    "capacidad_max": 178,
+    "umbral_min": 125,
+    "mu_demanda": 142,
+    "sigma_demanda": 14,
+    "leasing_usd_hora": 1563,
+    "consumo_kg_km": 2.70,
+    "autonomia_km": 6570
+  },
+  {
+    "modelo": "Airbus A319neo",
+    "capacidad_max": 160,
+    "umbral_min": 112,
+    "mu_demanda": 128,
+    "sigma_demanda": 13,
+    "leasing_usd_hora": 1250,
+    "consumo_kg_km": 2.40,
+    "autonomia_km": 6850
+  },
+  {
+    "modelo": "Embraer E195-E2",
+    "capacidad_max": 130,
+    "umbral_min": 91,
+    "mu_demanda": 104,
+    "sigma_demanda": 10,
+    "leasing_usd_hora": 938,
+    "consumo_kg_km": 2.10,
+    "autonomia_km": 4815
+  }
+]
