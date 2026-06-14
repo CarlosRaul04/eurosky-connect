@@ -1,22 +1,30 @@
-// motor/include/dijkstra.h
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
 #include "grafo.h"
-#include <string>
 #include <vector>
+#include <string>
 
-// Estructura para devolver los resultados del algoritmo
+/**
+ * Estructura que almacena el resultado del calculo de la ruta optima.
+ */
 struct ResultadoDijkstra {
     std::vector<std::string> ruta;
     double costoTotal;
     double tiempoTotal;
+    bool rutaValida;
 };
 
 class Dijkstra {
 public:
-    // Encuentra la ruta más barata desde un origen hasta un destino
-    static ResultadoDijkstra calcularRutaMasBarata(const GrafoRutas& grafo, const std::string& origen, const std::string& destino);
+    /**
+     * Calcula la ruta mas economica desde un origen a un destino, 
+     * aplicando penalizaciones por rentabilidad y poda por restriccion de tiempo.
+     */
+    static ResultadoDijkstra calcularRutaMasBarata(const GrafoRutas& grafo, 
+                                                   const std::string& origen, 
+                                                   const std::string& destino, 
+                                                   double tiempoMaximo);
 };
 
 #endif

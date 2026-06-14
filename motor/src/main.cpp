@@ -1,53 +1,83 @@
-// motor/src/main.cpp
 #include <iostream>
+#include <vector>
 #include <string>
+#include <set>
 #include "json.hpp"
 #include "grafo.h"
-#include "dijkstra.h" // ¡Incluimos nuestro nuevo algoritmo!
+#include "dijkstra.h"
+#include "bfs_dfs.h"
+#include "monte_carlo.h"
 
 using json = nlohmann::json;
 
 int main() {
     try {
         json contrato;
-        std::cin >> contrato;
+        if (!(std::cin >> contrato)) return 0;
 
-        std::string origen = contrato["originIATA"];
-        std::string modelo = contrato["aircraft"]["model"];
+        // 1. Preparar parametros de Monte Carlo
+        ParametrosAeronave params;
+        params.mu = contrato["aircraft"]["mu"];
+        params.sigma = contrato["aircraft"]["sigma"];
+        params.minThreshold = contrato["aircraft"]["minThreshold"];
 
         GrafoRutas grafo;
+        
+        // 2. Construccion del grafo con filtrado de Monte Carlo
+        // Solo agregamos rutas que pasan la simulacion de demanda
         for (const auto& ruta : contrato["routes"]) {
-            grafo.agregarArista(ruta["origin"], ruta["destination"],
-                                ruta["distanceKm"], ruta["flightTimeHours"],
-                                ruta["costTotalEUR"], ruta["ticketPriceEUR"]);
+            ResultadoSimulacion sim = MonteCarlo::simularDemanda(params);
+            
+            // Si la ruta es rentable, la agregamos al grafo
+            if (sim.esRentable) {
+                grafo.agregarArista(
+                    ruta["origin"], ruta["destination"],
+                    ruta["distanceKm"], ruta["flightTimeHours"],
+                    ruta["costTotalEUR"], ruta["ticketPriceEUR"]
+                );
+            }
         }
 
-        std::cout << "\n[Motor C++] JSON procesado exitosamente." << std::endl;
-        // Comentamos la impresión del grafo entero para no ensuciar la consola
-        // grafo.mostrarGrafo(); 
+        std::string origen = contrato["originIATA"];
+        std::string destino = "CDG"; // Tu destino de prueba
+        double limiteTiempo = contrato["maxFlightHours"];
 
-        // ==========================================
-        // EJECUCIÓN DE DIJKSTRA
-        // ==========================================
-        std::string destinoPrueba = "WAW"; // Varsovia
-        std::cout << "\n[Dijkstra] Calculando ruta de MENOR COSTO desde " << origen << " hasta " << destinoPrueba << "..." << std::endl;
+        // 3. Algoritmos de Analisis
+        // BFS: Validacion de conectividad
+        std::vector<std::string> visitadosBFS = Busqueda::realizarBFS(grafo, origen);
+        
+        // DFS: Viabilidad temporal
+        std::vector<std::string> caminoDFS;
+        std::set<std::string> visitadosDFS;
+        bool rutaViable = Busqueda::realizarDFS(grafo, origen, destino, limiteTiempo, caminoDFS, visitadosDFS);
 
-        ResultadoDijkstra res = Dijkstra::calcularRutaMasBarata(grafo, origen, destinoPrueba);
+        // Dijkstra: Optimizacion
+        ResultadoDijkstra res = Dijkstra::calcularRutaMasBarata(grafo, origen, destino, limiteTiempo);
 
-        std::cout << "------------------------------------------" << std::endl;
-        std::cout << "RUTA OPTIMIZADA ENCONTRADA" << std::endl;
-        std::cout << "Camino: ";
-        for (size_t i = 0; i < res.ruta.size(); i++) {
-            std::cout << res.ruta[i] << (i < res.ruta.size() - 1 ? " -> " : "");
-        }
-        std::cout << "\nCosto Operativo Total: " << res.costoTotal << " EUR" << std::endl;
-        std::cout << "Tiempo Estimado de Vuelo: " << res.tiempoTotal << " Horas" << std::endl;
-        std::cout << "------------------------------------------\n" << std::endl;
+        // 4. Salida JSON estructurada
+        json respuesta;
+        respuesta["origen"] = origen;
+        respuesta["destino"] = destino;
+        respuesta["limite_tiempo"] = limiteTiempo;
+        respuesta["red_conectada"] = (visitadosBFS.size() >= 5); // Verificamos conectividad minima
+        
+        respuesta["dfs_viabilidad"] = {
+            {"posible", rutaViable},
+            {"ruta", caminoDFS}
+        };
+        
+        respuesta["dijkstra_optimo"] = {
+            {"ruta", res.ruta},
+            {"costo_total_eur", res.costoTotal},
+            {"tiempo_total_horas", res.tiempoTotal},
+            {"ruta_valida", res.rutaValida}
+        };
+
+        std::cout << respuesta.dump() << std::endl;
 
     } catch (const std::exception& e) {
-        std::cerr << "Error critico en el Motor C++: " << e.what() << std::endl;
+        std::cout << json({{"error", e.what()}}).dump() << std::endl;
         return 1;
     }
-    
     return 0;
 }
