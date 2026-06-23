@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EuroSky Connect — Optimizador de jornada</title>
+
+    <!-- Bootstrap 5 (grid / utilidades) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Tipografias -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <!-- Estilos propios (despues de Bootstrap para que ganen los tokens) -->
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div class="app">
+
+    <!-- ===== Topbar ===== -->
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand__mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+            </span>
+            <div>
+                <div class="brand__name">EuroSky <b>Connect</b></div>
+                <div class="brand__sub">Optimización de jornada</div>
+            </div>
+        </div>
+
+        <nav class="tabs" role="tablist" aria-label="Secciones">
+            <button class="tab is-active" data-view="optimizer" role="tab">Optimizador</button>
+            <button class="tab" data-view="airports" role="tab">Aeropuertos</button>
+            <button class="tab" data-view="fleet" role="tab">Flota</button>
+        </nav>
+    </header>
+
+    <!-- ===================== VISTA: OPTIMIZADOR ===================== -->
+    <section id="view-optimizer" class="view is-active">
+        <div class="layout">
+
+            <!-- Panel de control -->
+            <aside class="card">
+                <div class="card__head">
+                    <div class="eyebrow">Configurar jornada</div>
+                    <h2 class="card__title" style="margin-top:6px;">Parámetros de vuelo</h2>
+                </div>
+                <div class="card__body">
+                    <div class="field">
+                        <label for="sel-aircraft">Aeronave</label>
+                        <select id="sel-aircraft" class="control"></select>
+                    </div>
+                    <div class="field">
+                        <label for="sel-origin">Aeropuerto base (origen)</label>
+                        <select id="sel-origin" class="control"></select>
+                    </div>
+
+                    <details class="adv">
+                        <summary>Opciones avanzadas</summary>
+                        <div class="adv__body">
+                            <div class="row-2">
+                                <div class="field">
+                                    <label for="in-hours">Jornada máx. (h)</label>
+                                    <input id="in-hours" class="control" type="number" value="8" min="1" max="16" step="0.5" />
+                                </div>
+                                <div class="field">
+                                    <label for="in-layover">Escala (h)</label>
+                                    <input id="in-layover" class="control" type="number" value="0.5" min="0" max="3" step="0.25" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="in-seed">Semilla Monte Carlo (opcional)</label>
+                                <input id="in-seed" class="control" type="number" placeholder="aleatoria cada día" />
+                            </div>
+                        </div>
+                    </details>
+
+                    <button id="btn-optimize" class="btn btn--primary">Optimizar jornada</button>
+
+                    <div id="statusline" class="statusline" hidden>
+                        <span class="chip"><span id="dot-mc" class="dot"></span> <span id="mc-text">—</span></span>
+                        <span class="chip"><span id="dot-net" class="dot"></span> <span id="net-text">—</span></span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Mapa + resultados -->
+            <main>
+                <div class="mapwrap">
+                    <div class="map__badge">
+                        <span class="dot dot--route"></span> <span id="map-mode">Red de aeropuertos</span>
+                    </div>
+                    <div id="map" class="map"></div>
+                </div>
+
+                <!-- KPIs -->
+                <div id="kpis" class="kpis" hidden>
+                    <div class="kpi kpi--hero">
+                        <div class="kpi__label">Beneficio neto</div>
+                        <div class="kpi__value"><span id="kpi-profit" data-count>0</span> <small>EUR</small></div>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi__label">Costo operativo</div>
+                        <div class="kpi__value"><span id="kpi-cost" data-count>0</span> <small>EUR</small></div>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi__label">Jornada</div>
+                        <div class="kpi__value"><span id="kpi-time">0</span> <small>/ <span id="kpi-time-max">8</span> h</small></div>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi__label">Tramos</div>
+                        <div class="kpi__value"><span id="kpi-legs">0</span></div>
+                    </div>
+                </div>
+
+                <!-- Itinerario -->
+                <div id="result-area">
+                    <div class="card" style="margin-top:18px;">
+                        <div class="card__body">
+                            <div class="empty">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+                                <h4>Aún no hay itinerario</h4>
+                                <p>Elige una aeronave y un aeropuerto base, luego pulsa <strong>Optimizar jornada</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- ===================== VISTA: AEROPUERTOS ===================== -->
+    <section id="view-airports" class="view">
+        <div class="section__head" style="margin-top:8px;">
+            <div>
+                <div class="eyebrow">Red europea</div>
+                <h3>Aeropuertos</h3>
+            </div>
+            <div class="toolsrow">
+                <button id="btn-refresh-maps" class="btn btn--ghost btn--sm">Recalcular distancias</button>
+                <button id="btn-add-airport" class="btn btn--primary btn--sm" style="width:auto;">Añadir aeropuerto</button>
+            </div>
+        </div>
+        <p class="card__hint" style="margin:-4px 0 14px;">Tras añadir, editar o eliminar un aeropuerto, recalcula las distancias para actualizar la red.</p>
+        <div class="tbl-card">
+            <table class="tbl">
+                <thead><tr><th>IATA</th><th>Aeropuerto</th><th>Ciudad</th><th>País</th><th class="num">Tasa (EUR)</th><th></th></tr></thead>
+                <tbody id="tbody-airports"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ===================== VISTA: FLOTA ===================== -->
+    <section id="view-fleet" class="view">
+        <div class="section__head" style="margin-top:8px;">
+            <div>
+                <div class="eyebrow">Aeronaves disponibles</div>
+                <h3>Flota</h3>
+            </div>
+            <button id="btn-add-aircraft" class="btn btn--primary btn--sm" style="width:auto;">Añadir aeronave</button>
+        </div>
+        <div class="tbl-card">
+            <table class="tbl">
+                <thead><tr><th>Modelo</th><th class="num">Cap.</th><th class="num">Umbral</th><th class="num">μ</th><th class="num">σ</th><th class="num">Leasing $/h</th><th class="num">kg/km</th><th></th></tr></thead>
+                <tbody id="tbody-fleet"></tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
+
+<!-- ===== Modal genérico (CRUD) ===== -->
+<div id="modal" class="modal-backdrop2" aria-hidden="true">
+    <div class="modal2" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal2__head">
+            <h3 id="modal-title">Formulario</h3>
+            <button class="btn-icon" data-close-modal aria-label="Cerrar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="modal2__body">
+            <form id="modal-form" novalidate>
+                <div id="modal-fields"></div>
+                <div class="modal2__foot">
+                    <button type="button" class="btn btn--ghost btn--sm" data-close-modal>Cancelar</button>
+                    <button type="submit" class="btn btn--primary btn--sm" style="width:auto;">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<!-- Config (clave de Google Maps, opcional) -->
+<script src="js/config.js"></script>
+<!-- Cliente REST -->
+<script src="js/api.js"></script>
+<!-- Mapa (Google Maps o SVG de respaldo) -->
+<script src="js/map.js"></script>
+<!-- Lógica de la app -->
+<script src="js/app.js"></script>
+<!-- Bootstrap JS (bundle) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
