@@ -1,2 +1,5 @@
-node_modules
+node_modules/
 .env
+motor/build/motor
+motor/build/motor.exe
+*.o

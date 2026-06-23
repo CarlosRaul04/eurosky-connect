@@ -1,70 +1,93 @@
 // backend/services/costService.js
-const fs = require('fs');
-const path = require('path');
+//
+// A partir de la matriz de distancias (routeRepository) y la aeronave
+// seleccionada (aircraftRepository), calcula los pesos economicos de cada
+// arista y arma el CONTRATO JSON que se inyecta por stdin al motor C++.
+//
+// El tiempo de vuelo se deriva de la velocidad de crucero (distancia / 840),
+// no del tiempo de conduccion.
+const airportRepository = require('../repositories/airportRepository');
+const aircraftRepository = require('../repositories/aircraftRepository');
+const routeRepository = require('../repositories/routeRepository');
+const AppError = require('../utils/AppError');
 
-class CostService {
-    buildEngineContract(aeronaveModelo, origenIATA, maxFlightHours = 8.0) {
-        try {
-            // 1. Leer nuestra base de datos JSON
-            const airports = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/airports.json'), 'utf8'));
-            const aircrafts = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/aircraft.json'), 'utf8'));
-            const routes = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/routes.json'), 'utf8'));
+// Constantes del modelo (Seccion 4 del documento).
+const PARAMS = Object.freeze({
+    VELOCIDAD_CRUCERO_KMH: 840,
+    PRECIO_JETA1_EUR_KG: 0.72,
+    FACTOR_RESERVA_COMBUSTIBLE: 1.08,
+    TASA_ENR_EUR_KM: 0.75,
+    EUR_USD: 1.09, // 1 EUR = 1.09 USD -> USD a EUR se divide entre 1.09
+    TARIFA_BASE_EUR: 40,
+    COEF_PRECIO_EUR_KM: 0.11,
+    MAX_JOURNEY_HOURS: 8.0,
+    LAYOVER_HOURS: 0.5,
+});
 
-            // 2. Buscar la aeronave seleccionada
-            const aeronave = aircrafts.find(a => a.modelo === aeronaveModelo);
-            if (!aeronave) throw new Error(`Aeronave ${aeronaveModelo} no encontrada en la flota.`);
+const round2 = (n) => Number(n.toFixed(2));
 
-            // 3. Crear un mapa (diccionario) de tasas terminales para acceso rápido
-            const terminalFees = {};
-            airports.forEach(a => terminalFees[a.iata] = a.terminalFeeEUR);
+function calcularTramo(distanciaKm, aeronave, terminalFeeDestinoEUR) {
+    const cFuel =
+        aeronave.consumo_kg_km * distanciaKm *
+        PARAMS.FACTOR_RESERVA_COMBUSTIBLE * PARAMS.PRECIO_JETA1_EUR_KG;
+    const cEnr = PARAMS.TASA_ENR_EUR_KM * distanciaKm;
+    const tiempoVueloH = distanciaKm / PARAMS.VELOCIDAD_CRUCERO_KMH;
+    const cLeas = (aeronave.leasing_usd_hora / PARAMS.EUR_USD) * tiempoVueloH;
+    const cTns = terminalFeeDestinoEUR;
 
-            const rutasCalculadas = [];
-
-            // 4. Aplicar las matemáticas del RF-06 y RF-08 a cada ruta
-            routes.forEach(ruta => {
-                const dist = ruta.distanciaKm;
-
-                // Fórmulas financieras (Sección 4.4 del documento)
-                const c_enr = 0.75 * dist;
-                const c_fuel = aeronave.consumo_kg_km * dist * 1.08 * 0.72;
-                const c_leas = (aeronave.leasing_usd_hora / 1.09) * (dist / 840);
-                const c_tns = terminalFees[ruta.destinoIATA]; // Tasa del aeropuerto de destino
-
-                const ct = c_fuel + c_tns + c_enr + c_leas;
-                const precio = 40 + (0.11 * dist);
-
-                rutasCalculadas.push({
-                    origin: ruta.origenIATA,
-                    destination: ruta.destinoIATA,
-                    // Redondeamos a 2 decimales para mantener limpieza (RNF-09)
-                    distanceKm: Number(dist.toFixed(2)),
-                    flightTimeHours: Number(ruta.tiempoHoras.toFixed(2)),
-                    costTotalEUR: Number(ct.toFixed(2)),
-                    ticketPriceEUR: Number(precio.toFixed(2))
-                });
-            });
-
-            // 5. Armar el Contrato JSON exacto (Input para stdin de C++)
-            const engineContract = {
-                originIATA: origenIATA,
-                maxFlightHours: maxFlightHours,
-                aircraft: {
-                    model: aeronave.modelo,
-                    maxCapacity: aeronave.capacidad_max,
-                    minThreshold: aeronave.umbral_min,
-                    mu: aeronave.mu_demanda,
-                    sigma: aeronave.sigma_demanda
-                },
-                routes: rutasCalculadas
-            };
-
-            return engineContract;
-
-        } catch (error) {
-            console.error('[Error en CostService]:', error.message);
-            throw error;
-        }
-    }
+    return {
+        tiempoVueloH,
+        costoTotalEUR: cFuel + cEnr + cLeas + cTns,
+        precioBoletoEUR: PARAMS.TARIFA_BASE_EUR + PARAMS.COEF_PRECIO_EUR_KM * distanciaKm,
+    };
 }
 
-module.exports = new CostService();
+function buildEngineContract(modeloAeronave, origenIATA, opciones = {}) {
+    const aeronave = aircraftRepository.findByModel(modeloAeronave);
+    if (!aeronave) throw new AppError(404, `Aeronave "${modeloAeronave}" no encontrada en la flota.`);
+    if (!airportRepository.exists(origenIATA)) {
+        throw new AppError(404, `Aeropuerto de origen "${origenIATA}" no existe en la red.`);
+    }
+
+    const rutas = routeRepository.findAll();
+    if (!rutas.length) {
+        throw new AppError(409, 'No hay matriz de rutas. Ejecuta el refresh de mapas primero.');
+    }
+
+    const terminalFee = Object.fromEntries(
+        airportRepository.findAll().map((a) => [a.iata, a.terminalFeeEUR])
+    );
+
+    // Defensa: ignora rutas cuya matriz quedo desactualizada (algun extremo ya
+    // no existe en la red). Evita propagar NaN/null al motor.
+    const routesCalculadas = rutas
+        .filter((r) => terminalFee[r.origenIATA] !== undefined && terminalFee[r.destinoIATA] !== undefined)
+        .map((r) => {
+            const t = calcularTramo(r.distanciaKm, aeronave, terminalFee[r.destinoIATA]);
+            return {
+                origin: r.origenIATA,
+                destination: r.destinoIATA,
+                distanceKm: round2(r.distanciaKm),
+                flightTimeHours: round2(t.tiempoVueloH),
+                costTotalEUR: round2(t.costoTotalEUR),
+                ticketPriceEUR: round2(t.precioBoletoEUR),
+            };
+        });
+
+    return {
+        originIATA: origenIATA,
+        maxJourneyHours: opciones.maxJourneyHours ?? PARAMS.MAX_JOURNEY_HOURS,
+        layoverHours: opciones.layoverHours ?? PARAMS.LAYOVER_HOURS,
+        monteCarloSeed: opciones.seed ?? null,
+        aircraft: {
+            model: aeronave.modelo,
+            maxCapacity: aeronave.capacidad_max,
+            minThreshold: aeronave.umbral_min,
+            mu: aeronave.mu_demanda,
+            sigma: aeronave.sigma_demanda,
+        },
+        routes: routesCalculadas,
+    };
+}
+
+module.exports = { buildEngineContract, PARAMS };

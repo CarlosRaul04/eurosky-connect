@@ -1,36 +1,53 @@
 // motor/src/grafo.h
+//
+// Grafo ponderado dirigido de la red de aeropuertos.
+// Cada arista (u -> v) transporta los tres pesos que el resto de los
+// algoritmos necesitan:
+//   - tiempoVueloH : tiempo de vuelo del tramo (horas)        -> restriccion de jornada
+//   - costoEUR     : costo operativo total CT(u,v) (EUR)      -> Dijkstra / Floyd-Warshall
+//   - beneficioEUR : beneficio neto b(u,v) (EUR)              -> Greedy / DFS (objetivo)
+//
+// La factibilidad de una arista (pax >= umbral y b(u,v) > 0) la decide
+// Monte Carlo; las aristas inviables simplemente no se insertan en el grafo.
 #ifndef GRAFO_H
 #define GRAFO_H
 
-#include <iostream>
-#include <vector>
 #include <string>
+#include <vector>
 #include <unordered_map>
 
-// Representa el peso múltiple de nuestra conexión
 struct Arista {
     std::string destino;
     double distanciaKm;
-    double tiempoHoras;
-    double costoTotalEUR;
+    double tiempoVueloH;
+    double costoEUR;       // CT(u,v): peso para minimizacion de costo
     double precioBoletoEUR;
+    int    paxSimulados;   // demanda del dia (Monte Carlo)
+    double ingresoEUR;     // pax * precio
+    double beneficioEUR;   // b(u,v) = ingreso - CT: peso para maximizacion
 };
 
 class GrafoRutas {
 private:
-    // Lista de adyacencia: Mapa que asocia un IATA (ej. "LHR") con su lista de rutas
-    std::unordered_map<std::string, std::vector<Arista>> adjList;
+    // Lista de adyacencia: IATA -> aristas salientes. Grafo disperso (STL).
+    std::unordered_map<std::string, std::vector<Arista>> adyacencia_;
 
 public:
-    // Método para poblar el grafo
-    void agregarArista(const std::string& origen, const std::string& destino, 
-                       double dist, double tiempo, double costo, double precio);
-    
-    // Método de depuración para ver que se armó bien
-    void mostrarGrafo() const;
-    
-    // Getter para que los algoritmos (Dijkstra, BFS, etc.) puedan leer el grafo luego
-    const std::unordered_map<std::string, std::vector<Arista>>& obtenerAdyacencia() const;
+    // Inserta un nodo aislado si aun no existe (garantiza que aparezca en
+    // recorridos aunque no tenga aristas factibles).
+    void registrarNodo(const std::string& iata);
+
+    // Inserta una arista factible u -> v. Complejidad: O(1) amortizado.
+    void agregarArista(const std::string& origen, const Arista& arista);
+
+    // Acceso de solo lectura para los algoritmos.
+    const std::vector<Arista>& vecinos(const std::string& iata) const;
+    const std::unordered_map<std::string, std::vector<Arista>>& adyacencia() const;
+
+    bool existeNodo(const std::string& iata) const;
+    std::vector<std::string> nodos() const;
+    std::size_t numNodos() const;
+    std::size_t numAristas() const;
 };
 
-#endif
+#endif // GRAFO_H

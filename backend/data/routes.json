@@ -1,1262 +1,1052 @@
 [
   {
-    "origenIATA": "WAW",
-    "destinoIATA": "VIE",
-    "distanciaKm": 676.708,
-    "tiempoHoras": 6.84
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "CPH",
-    "distanciaKm": 997.003,
-    "tiempoHoras": 11.820277777777777
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "CDG",
-    "distanciaKm": 294.608,
-    "tiempoHoras": 3.0661111111111112
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "WAW",
-    "distanciaKm": 675.085,
-    "tiempoHoras": 6.826388888888889
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "MUC",
-    "distanciaKm": 338.998,
-    "tiempoHoras": 3.5791666666666666
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "FRA",
-    "distanciaKm": 388.978,
-    "tiempoHoras": 4.164166666666667
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "MUC",
-    "distanciaKm": 1049.245,
-    "tiempoHoras": 10.35361111111111
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "BRU",
-    "distanciaKm": 1290.437,
-    "tiempoHoras": 13.040555555555555
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "AMS",
-    "distanciaKm": 811.484,
-    "tiempoHoras": 9.561111111111112
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "FRA",
-    "distanciaKm": 821.718,
-    "tiempoHoras": 9.685555555555556
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 1327.224,
-    "tiempoHoras": 13.5425
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "ATH",
-    "distanciaKm": 1721.839,
-    "tiempoHoras": 17.195
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "MAD",
-    "distanciaKm": 646.68,
-    "tiempoHoras": 6.038888888888889
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "FCO",
-    "distanciaKm": 899.03,
-    "tiempoHoras": 9.231944444444444
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "CDG",
-    "distanciaKm": 1226.846,
-    "tiempoHoras": 13.698055555555555
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "FRA",
-    "distanciaKm": 750.537,
-    "tiempoHoras": 8.045277777777779
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "WAW",
-    "distanciaKm": 997.652,
-    "tiempoHoras": 11.726666666666667
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "BRU",
-    "distanciaKm": 1125.496,
-    "tiempoHoras": 11.780555555555555
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "AMS",
-    "distanciaKm": 835.778,
-    "tiempoHoras": 8.631666666666666
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1130.303,
-    "tiempoHoras": 11.495555555555555
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "ATH",
-    "distanciaKm": 2812.888,
-    "tiempoHoras": 29.9575
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "MAD",
-    "distanciaKm": 1571.888,
-    "tiempoHoras": 15.650555555555556
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "MAD",
-    "distanciaKm": 1659.326,
-    "tiempoHoras": 16.3225
-  },
-  {
     "origenIATA": "LHR",
     "destinoIATA": "CDG",
-    "distanciaKm": 486.795,
-    "tiempoHoras": 5.295277777777778
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "VIE",
-    "distanciaKm": 423.358,
-    "tiempoHoras": 4.66
-  },
-  {
-    "origenIATA": "MAD",
-    "destinoIATA": "BCN",
-    "distanciaKm": 607.835,
-    "tiempoHoras": 5.959722222222222
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "VIE",
-    "distanciaKm": 1130.993,
-    "tiempoHoras": 11.507777777777777
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "MAD",
-    "distanciaKm": 2845.404,
-    "tiempoHoras": 28.325833333333332
-  },
-  {
-    "origenIATA": "ATH",
-    "destinoIATA": "BRU",
-    "distanciaKm": 2782.163,
-    "tiempoHoras": 27.86638888888889
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "ATH",
-    "distanciaKm": 2833.944,
-    "tiempoHoras": 28.164722222222224
-  },
-  {
-    "origenIATA": "ATH",
-    "destinoIATA": "AMS",
-    "distanciaKm": 2839.227,
-    "tiempoHoras": 28.476111111111113
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "LHR",
-    "distanciaKm": 1541.093,
-    "tiempoHoras": 16.54222222222222
-  },
-  {
-    "origenIATA": "MAD",
-    "destinoIATA": "AMS",
-    "distanciaKm": 1763.091,
-    "tiempoHoras": 17.453611111111112
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "CDG",
-    "distanciaKm": 1249.369,
-    "tiempoHoras": 12.911666666666667
-  },
-  {
-    "origenIATA": "CDG",
-    "destinoIATA": "AMS",
-    "distanciaKm": 483.823,
-    "tiempoHoras": 5.03
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "CDG",
-    "distanciaKm": 556.835,
-    "tiempoHoras": 5.729444444444445
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "BRU",
-    "distanciaKm": 657.096,
-    "tiempoHoras": 6.828888888888889
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 407.754,
-    "tiempoHoras": 4.303055555555556
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "CDG",
-    "distanciaKm": 841.723,
-    "tiempoHoras": 8.471388888888889
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "LHR",
-    "distanciaKm": 583.484,
-    "tiempoHoras": 6.606111111111111
-  },
-  {
-    "origenIATA": "MAD",
-    "destinoIATA": "CDG",
-    "distanciaKm": 1282.939,
-    "tiempoHoras": 12.516388888888889
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "AMS",
-    "distanciaKm": 2232.501,
-    "tiempoHoras": 21.914444444444445
+    "distanciaKm": 346.96
   },
   {
     "origenIATA": "LHR",
     "destinoIATA": "FRA",
-    "distanciaKm": 805.863,
-    "tiempoHoras": 9.075
+    "distanciaKm": 654.22
   },
   {
-    "origenIATA": "FRA",
-    "destinoIATA": "VIE",
-    "distanciaKm": 750.571,
-    "tiempoHoras": 7.9880555555555555
+    "origenIATA": "LHR",
+    "destinoIATA": "MUC",
+    "distanciaKm": 941.06
   },
   {
-    "origenIATA": "CPH",
+    "origenIATA": "LHR",
+    "destinoIATA": "MAD",
+    "distanciaKm": 1243.18
+  },
+  {
+    "origenIATA": "LHR",
     "destinoIATA": "BCN",
-    "distanciaKm": 2147.855,
-    "tiempoHoras": 22.63277777777778
+    "distanciaKm": 1147.58
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "AMS",
+    "distanciaKm": 370.3
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1443.86
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "LIS",
+    "distanciaKm": 1564.8
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "VIE",
+    "distanciaKm": 1274.53
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "ATH",
+    "distanciaKm": 2426.28
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 788.4
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "BRU",
+    "distanciaKm": 349.99
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "CPH",
+    "distanciaKm": 978.91
+  },
+  {
+    "origenIATA": "LHR",
+    "destinoIATA": "WAW",
+    "distanciaKm": 1469.1
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "LHR",
+    "distanciaKm": 346.96
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "FRA",
+    "distanciaKm": 449.24
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "MUC",
+    "distanciaKm": 681.71
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "MAD",
+    "distanciaKm": 1061.65
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "BCN",
+    "distanciaKm": 858.34
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "AMS",
+    "distanciaKm": 398.96
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1100.99
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "LIS",
+    "distanciaKm": 1470.17
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "VIE",
+    "distanciaKm": 1035.24
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "ATH",
+    "distanciaKm": 2108.64
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 477.07
   },
   {
     "origenIATA": "CDG",
     "destinoIATA": "BRU",
-    "distanciaKm": 291.958,
-    "tiempoHoras": 2.9963888888888888
+    "distanciaKm": 251.86
   },
   {
-    "origenIATA": "AMS",
+    "origenIATA": "CDG",
+    "destinoIATA": "CPH",
+    "distanciaKm": 1003.83
+  },
+  {
+    "origenIATA": "CDG",
+    "destinoIATA": "WAW",
+    "distanciaKm": 1342.76
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "LHR",
+    "distanciaKm": 654.22
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "CDG",
+    "distanciaKm": 449.24
+  },
+  {
+    "origenIATA": "FRA",
     "destinoIATA": "MUC",
-    "distanciaKm": 831.688,
-    "tiempoHoras": 8.551944444444445
+    "distanciaKm": 299.09
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "MAD",
+    "distanciaKm": 1419.98
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "BCN",
+    "distanciaKm": 1093.41
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "AMS",
+    "distanciaKm": 366.49
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "FCO",
+    "distanciaKm": 958.34
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "LIS",
+    "distanciaKm": 1874.33
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "VIE",
+    "distanciaKm": 620.32
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "ATH",
+    "distanciaKm": 1815.65
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 286.34
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "BRU",
+    "distanciaKm": 304.75
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "CPH",
+    "distanciaKm": 678.53
+  },
+  {
+    "origenIATA": "FRA",
+    "destinoIATA": "WAW",
+    "distanciaKm": 896.25
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "LHR",
+    "distanciaKm": 941.06
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "CDG",
+    "distanciaKm": 681.71
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "FRA",
+    "distanciaKm": 299.09
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "MAD",
+    "distanciaKm": 1495.36
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "BCN",
+    "distanciaKm": 1094.33
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "AMS",
+    "distanciaKm": 664.07
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "FCO",
+    "distanciaKm": 729.64
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "LIS",
+    "distanciaKm": 1983.99
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "VIE",
+    "distanciaKm": 355.29
   },
   {
     "origenIATA": "MUC",
     "destinoIATA": "ATH",
-    "distanciaKm": 2091.562,
-    "tiempoHoras": 20.670833333333334
-  },
-  {
-    "origenIATA": "BCN",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1346.402,
-    "tiempoHoras": 13.763333333333334
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "FRA",
-    "distanciaKm": 2301.843,
-    "tiempoHoras": 22.044444444444444
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "MUC",
-    "distanciaKm": 986.127,
-    "tiempoHoras": 10.35138888888889
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "LHR",
-    "distanciaKm": 2218.457,
-    "tiempoHoras": 21.966666666666665
-  },
-  {
-    "origenIATA": "ATH",
-    "destinoIATA": "WAW",
-    "distanciaKm": 2331.207,
-    "tiempoHoras": 22.878055555555555
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "WAW",
-    "distanciaKm": 3305.199,
-    "tiempoHoras": 32.36388888888889
+    "distanciaKm": 1517.68
   },
   {
     "origenIATA": "MUC",
-    "destinoIATA": "LHR",
-    "distanciaKm": 1191.886,
-    "tiempoHoras": 12.308055555555555
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "AMS",
-    "distanciaKm": 205.056,
-    "tiempoHoras": 2.3175
-  },
-  {
-    "origenIATA": "CDG",
-    "destinoIATA": "MUC",
-    "distanciaKm": 855.987,
-    "tiempoHoras": 8.683333333333334
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "AMS",
-    "distanciaKm": 1689.171,
-    "tiempoHoras": 17.251666666666665
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "CPH",
-    "distanciaKm": 1938.399,
-    "tiempoHoras": 21.860277777777778
-  },
-  {
-    "origenIATA": "CDG",
-    "destinoIATA": "WAW",
-    "distanciaKm": 1556.521,
-    "tiempoHoras": 15.479722222222222
-  },
-  {
-    "origenIATA": "BCN",
-    "destinoIATA": "MUC",
-    "distanciaKm": 1408.641,
-    "tiempoHoras": 13.940555555555555
-  },
-  {
-    "origenIATA": "BRU",
     "destinoIATA": "ZRH",
-    "distanciaKm": 654.725,
-    "tiempoHoras": 6.908611111111111
+    "distanciaKm": 260.56
   },
   {
-    "origenIATA": "LIS",
-    "destinoIATA": "VIE",
-    "distanciaKm": 2854.816,
-    "tiempoHoras": 28.370555555555555
+    "origenIATA": "MUC",
+    "destinoIATA": "BRU",
+    "distanciaKm": 596.89
   },
   {
-    "origenIATA": "BCN",
+    "origenIATA": "MUC",
+    "destinoIATA": "CPH",
+    "distanciaKm": 809.9
+  },
+  {
+    "origenIATA": "MUC",
+    "destinoIATA": "WAW",
+    "distanciaKm": 777.34
+  },
+  {
+    "origenIATA": "MAD",
     "destinoIATA": "LHR",
-    "distanciaKm": 1547.408,
-    "tiempoHoras": 15.515
+    "distanciaKm": 1243.18
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "CDG",
+    "distanciaKm": 1061.65
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "FRA",
+    "distanciaKm": 1419.98
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "MUC",
+    "distanciaKm": 1495.36
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "BCN",
+    "distanciaKm": 483.1
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "AMS",
+    "distanciaKm": 1458.45
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1330.06
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "LIS",
+    "distanciaKm": 513.67
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "VIE",
+    "distanciaKm": 1804.63
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "ATH",
+    "distanciaKm": 2377.45
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 1238.48
+  },
+  {
+    "origenIATA": "MAD",
+    "destinoIATA": "BRU",
+    "distanciaKm": 1313.15
   },
   {
     "origenIATA": "MAD",
     "destinoIATA": "CPH",
-    "distanciaKm": 2496.433,
-    "tiempoHoras": 26.016111111111112
-  },
-  {
-    "origenIATA": "BCN",
-    "destinoIATA": "AMS",
-    "distanciaKm": 1551.151,
-    "tiempoHoras": 15.405
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "CDG",
-    "distanciaKm": 487.612,
-    "tiempoHoras": 5.0938888888888885
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1555.452,
-    "tiempoHoras": 15.44111111111111
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "LHR",
-    "distanciaKm": 1923.8,
-    "tiempoHoras": 19.424722222222222
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "BRU",
-    "distanciaKm": 207.729,
-    "tiempoHoras": 2.2952777777777778
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "FRA",
-    "distanciaKm": 404.5,
-    "tiempoHoras": 4.259444444444444
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "FCO",
-    "distanciaKm": 2466.64,
-    "tiempoHoras": 24.409444444444443
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1335.579,
-    "tiempoHoras": 13.267222222222221
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "LIS",
-    "distanciaKm": 2302.428,
-    "tiempoHoras": 22.24861111111111
+    "distanciaKm": 2057.7
   },
   {
     "origenIATA": "MAD",
-    "destinoIATA": "MUC",
-    "distanciaKm": 1972.199,
-    "tiempoHoras": 19.33972222222222
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "VIE",
-    "distanciaKm": 1546.554,
-    "tiempoHoras": 16.698055555555555
+    "destinoIATA": "WAW",
+    "distanciaKm": 2269.43
   },
   {
     "origenIATA": "BCN",
-    "destinoIATA": "CPH",
-    "distanciaKm": 2150.526,
-    "tiempoHoras": 22.81277777777778
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "ATH",
-    "distanciaKm": 4231.771,
-    "tiempoHoras": 41.56166666666667
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1781.052,
-    "tiempoHoras": 17.85361111111111
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "LIS",
-    "distanciaKm": 2226.24,
-    "tiempoHoras": 22.135555555555555
-  },
-  {
-    "origenIATA": "MAD",
-    "destinoIATA": "ATH",
-    "distanciaKm": 3675.092,
-    "tiempoHoras": 36.31472222222222
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "ATH",
-    "distanciaKm": 3238.309,
-    "tiempoHoras": 32.66111111111111
-  },
-  {
-    "origenIATA": "BRU",
     "destinoIATA": "LHR",
-    "distanciaKm": 419.804,
-    "tiempoHoras": 4.885555555555555
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "VIE",
-    "distanciaKm": 744.528,
-    "tiempoHoras": 7.889444444444444
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "LIS",
-    "distanciaKm": 3316.098,
-    "tiempoHoras": 32.77722222222222
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "VIE",
-    "distanciaKm": 1149.405,
-    "tiempoHoras": 13.662777777777778
-  },
-  {
-    "origenIATA": "BCN",
-    "destinoIATA": "LIS",
-    "distanciaKm": 1237.054,
-    "tiempoHoras": 11.800277777777778
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "LIS",
-    "distanciaKm": 2974.82,
-    "tiempoHoras": 30.733888888888888
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "WAW",
-    "distanciaKm": 1284.568,
-    "tiempoHoras": 12.961944444444445
-  },
-  {
-    "origenIATA": "ATH",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1281.364,
-    "tiempoHoras": 19.744444444444444
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "CPH",
-    "distanciaKm": 945.212,
-    "tiempoHoras": 11.075
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "CDG",
-    "distanciaKm": 1752.349,
-    "tiempoHoras": 16.977222222222224
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "LHR",
-    "distanciaKm": 1058.681,
-    "tiempoHoras": 10.991666666666667
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "BCN",
-    "distanciaKm": 2361.074,
-    "tiempoHoras": 23.37388888888889
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "MUC",
-    "distanciaKm": 976.282,
-    "tiempoHoras": 11.616944444444444
-  },
-  {
-    "origenIATA": "CDG",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 617.022,
-    "tiempoHoras": 6.716666666666667
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "BRU",
-    "distanciaKm": 2040.637,
-    "tiempoHoras": 19.880555555555556
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "AMS",
-    "distanciaKm": 447.616,
-    "tiempoHoras": 4.746944444444445
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "LIS",
-    "distanciaKm": 2235.586,
-    "tiempoHoras": 22.129722222222224
-  },
-  {
-    "origenIATA": "BCN",
-    "destinoIATA": "MAD",
-    "distanciaKm": 605.72,
-    "tiempoHoras": 5.947777777777778
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "AMS",
-    "distanciaKm": 1202.013,
-    "tiempoHoras": 12.179166666666667
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "BRU",
-    "distanciaKm": 949.159,
-    "tiempoHoras": 10.997222222222222
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "LHR",
-    "distanciaKm": 1669.224,
-    "tiempoHoras": 17.441111111111113
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1257.946,
-    "tiempoHoras": 12.841388888888888
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1237.572,
-    "tiempoHoras": 11.68388888888889
-  },
-  {
-    "origenIATA": "CDG",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1071.93,
-    "tiempoHoras": 10.467777777777778
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "FRA",
-    "distanciaKm": 1087.966,
-    "tiempoHoras": 10.92
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "ATH",
-    "distanciaKm": 2335.526,
-    "tiempoHoras": 23.06222222222222
-  },
-  {
-    "origenIATA": "ATH",
-    "destinoIATA": "FRA",
-    "distanciaKm": 2407.204,
-    "tiempoHoras": 24.13083333333333
-  },
-  {
-    "origenIATA": "ATH",
-    "destinoIATA": "VIE",
-    "distanciaKm": 1719.497,
-    "tiempoHoras": 17.03527777777778
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "MAD",
-    "distanciaKm": 2504.127,
-    "tiempoHoras": 26.282777777777778
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "ATH",
-    "distanciaKm": 2358.092,
-    "tiempoHoras": 23.579166666666666
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "LHR",
-    "distanciaKm": 1327.946,
-    "tiempoHoras": 15.398055555555555
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 344.191,
-    "tiempoHoras": 3.6180555555555554
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "CPH",
-    "distanciaKm": 824.694,
-    "tiempoHoras": 9.735833333333334
-  },
-  {
-    "origenIATA": "ATH",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 2360.774,
-    "tiempoHoras": 23.51
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 843.868,
-    "tiempoHoras": 8.789444444444445
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "BRU",
-    "distanciaKm": 1510.489,
-    "tiempoHoras": 15.448888888888888
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "BRU",
-    "distanciaKm": 422.424,
-    "tiempoHoras": 5.0808333333333335
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 1220.03,
-    "tiempoHoras": 13.668611111111112
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "CPH",
-    "distanciaKm": 1295.317,
-    "tiempoHoras": 15.577777777777778
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1838.099,
-    "tiempoHoras": 19.373333333333335
-  },
-  {
-    "origenIATA": "BCN",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 1078.984,
-    "tiempoHoras": 10.623611111111112
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "MAD",
-    "distanciaKm": 1755.546,
-    "tiempoHoras": 17.684166666666666
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "WAW",
-    "distanciaKm": 1327.061,
-    "tiempoHoras": 13.429722222222223
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "CPH",
-    "distanciaKm": 1220.701,
-    "tiempoHoras": 13.696666666666667
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "ATH",
-    "distanciaKm": 1278.821,
-    "tiempoHoras": 19.699166666666667
-  },
-  {
-    "origenIATA": "CDG",
-    "destinoIATA": "LHR",
-    "distanciaKm": 487.798,
-    "tiempoHoras": 5.248055555555555
-  },
-  {
-    "origenIATA": "CDG",
-    "destinoIATA": "MAD",
-    "distanciaKm": 1281.371,
-    "tiempoHoras": 12.705277777777777
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "MUC",
-    "distanciaKm": 392.752,
-    "tiempoHoras": 4.052222222222222
-  },
-  {
-    "origenIATA": "ATH",
-    "destinoIATA": "MUC",
-    "distanciaKm": 2087.867,
-    "tiempoHoras": 20.54888888888889
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 2119.629,
-    "tiempoHoras": 20.743333333333332
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1083.975,
-    "tiempoHoras": 10.908333333333333
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1505.479,
-    "tiempoHoras": 15.413333333333334
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1350.034,
-    "tiempoHoras": 13.636388888888888
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "CDG",
-    "distanciaKm": 620.621,
-    "tiempoHoras": 6.6825
-  },
-  {
-    "origenIATA": "WAW",
-    "destinoIATA": "CDG",
-    "distanciaKm": 1568.124,
-    "tiempoHoras": 15.741388888888888
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "WAW",
-    "distanciaKm": 1201.872,
-    "tiempoHoras": 12.153055555555556
-  },
-  {
-    "origenIATA": "ZRH",
-    "destinoIATA": "LIS",
-    "distanciaKm": 2131.264,
-    "tiempoHoras": 20.95
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "CDG",
-    "distanciaKm": 1440.235,
-    "tiempoHoras": 14.383611111111112
-  },
-  {
-    "origenIATA": "LIS",
-    "destinoIATA": "CPH",
-    "distanciaKm": 2965.843,
-    "tiempoHoras": 30.476944444444445
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "CPH",
-    "distanciaKm": 982.568,
-    "tiempoHoras": 11.800833333333333
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "WAW",
-    "distanciaKm": 1671.331,
-    "tiempoHoras": 17.536944444444444
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "AMS",
-    "distanciaKm": 1182.56,
-    "tiempoHoras": 12.390555555555556
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "FRA",
-    "distanciaKm": 448.815,
-    "tiempoHoras": 4.864444444444445
-  },
-  {
-    "origenIATA": "BCN",
-    "destinoIATA": "BRU",
-    "distanciaKm": 1359.287,
-    "tiempoHoras": 13.37138888888889
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "BRU",
-    "distanciaKm": 767,
-    "tiempoHoras": 7.877222222222223
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1822.862,
-    "tiempoHoras": 18.61
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "LHR",
-    "distanciaKm": 806.149,
-    "tiempoHoras": 8.898888888888889
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1362.448,
-    "tiempoHoras": 13.413055555555555
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "WAW",
-    "distanciaKm": 1780.841,
-    "tiempoHoras": 17.87
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "MUC",
-    "distanciaKm": 1193.099,
-    "tiempoHoras": 12.500277777777777
+    "distanciaKm": 1147.58
   },
   {
     "origenIATA": "BCN",
     "destinoIATA": "CDG",
-    "distanciaKm": 1070.999,
-    "tiempoHoras": 10.467777777777778
+    "distanciaKm": 858.34
   },
   {
-    "origenIATA": "VIE",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 771.491,
-    "tiempoHoras": 8.04
-  },
-  {
-    "origenIATA": "MAD",
-    "destinoIATA": "LIS",
-    "distanciaKm": 642.751,
-    "tiempoHoras": 6.053888888888889
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "VIE",
-    "distanciaKm": 1129.669,
-    "tiempoHoras": 11.787222222222223
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "MUC",
-    "distanciaKm": 423.96,
-    "tiempoHoras": 4.686388888888889
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "CPH",
-    "distanciaKm": 1149.656,
-    "tiempoHoras": 13.713333333333333
-  },
-  {
-    "origenIATA": "MAD",
-    "destinoIATA": "LHR",
-    "distanciaKm": 1749.047,
-    "tiempoHoras": 17.50583333333333
-  },
-  {
-    "origenIATA": "BRU",
-    "destinoIATA": "MUC",
-    "distanciaKm": 771.85,
-    "tiempoHoras": 7.851666666666667
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "LIS",
-    "distanciaKm": 2475.407,
-    "tiempoHoras": 24.31111111111111
-  },
-  {
-    "origenIATA": "CPH",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1931.989,
-    "tiempoHoras": 21.511666666666667
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "BRU",
-    "distanciaKm": 390.552,
-    "tiempoHoras": 4.137222222222222
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "FCO",
-    "distanciaKm": 985.175,
-    "tiempoHoras": 10.252222222222223
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "AMS",
-    "distanciaKm": 584.443,
-    "tiempoHoras": 6.759722222222222
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "ZRH",
-    "distanciaKm": 901.687,
-    "tiempoHoras": 9.320277777777777
-  },
-  {
-    "origenIATA": "MUC",
+    "origenIATA": "BCN",
     "destinoIATA": "FRA",
-    "distanciaKm": 392.042,
-    "tiempoHoras": 4.141666666666667
+    "distanciaKm": 1093.41
+  },
+  {
+    "origenIATA": "BCN",
+    "destinoIATA": "MUC",
+    "distanciaKm": 1094.33
+  },
+  {
+    "origenIATA": "BCN",
+    "destinoIATA": "MAD",
+    "distanciaKm": 483.1
+  },
+  {
+    "origenIATA": "BCN",
+    "destinoIATA": "AMS",
+    "distanciaKm": 1241.31
+  },
+  {
+    "origenIATA": "BCN",
+    "destinoIATA": "FCO",
+    "distanciaKm": 847.08
+  },
+  {
+    "origenIATA": "BCN",
+    "destinoIATA": "LIS",
+    "distanciaKm": 994.53
+  },
+  {
+    "origenIATA": "BCN",
+    "destinoIATA": "VIE",
+    "distanciaKm": 1369.35
   },
   {
     "origenIATA": "BCN",
     "destinoIATA": "ATH",
-    "distanciaKm": 3111.534,
-    "tiempoHoras": 30.915555555555557
+    "distanciaKm": 1904.11
   },
   {
-    "origenIATA": "FRA",
-    "destinoIATA": "MAD",
-    "distanciaKm": 1831.735,
-    "tiempoHoras": 17.79722222222222
+    "origenIATA": "BCN",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 856.01
   },
   {
-    "origenIATA": "CDG",
-    "destinoIATA": "CPH",
-    "distanciaKm": 1217.165,
-    "tiempoHoras": 13.5925
-  },
-  {
-    "origenIATA": "MAD",
+    "origenIATA": "BCN",
     "destinoIATA": "BRU",
-    "distanciaKm": 1571.226,
-    "tiempoHoras": 15.419722222222223
+    "distanciaKm": 1083.66
   },
   {
-    "origenIATA": "ATH",
-    "destinoIATA": "LHR",
-    "distanciaKm": 3233.944,
-    "tiempoHoras": 32.352222222222224
+    "origenIATA": "BCN",
+    "destinoIATA": "CPH",
+    "distanciaKm": 1768.23
   },
   {
     "origenIATA": "BCN",
     "destinoIATA": "WAW",
-    "distanciaKm": 2360.373,
-    "tiempoHoras": 23.401666666666667
+    "distanciaKm": 1869.39
   },
   {
-    "origenIATA": "ATH",
+    "origenIATA": "AMS",
+    "destinoIATA": "LHR",
+    "distanciaKm": 370.3
+  },
+  {
+    "origenIATA": "AMS",
+    "destinoIATA": "CDG",
+    "distanciaKm": 398.96
+  },
+  {
+    "origenIATA": "AMS",
+    "destinoIATA": "FRA",
+    "distanciaKm": 366.49
+  },
+  {
+    "origenIATA": "AMS",
+    "destinoIATA": "MUC",
+    "distanciaKm": 664.07
+  },
+  {
+    "origenIATA": "AMS",
+    "destinoIATA": "MAD",
+    "distanciaKm": 1458.45
+  },
+  {
+    "origenIATA": "AMS",
     "destinoIATA": "BCN",
-    "distanciaKm": 3113.131,
-    "tiempoHoras": 30.743333333333332
+    "distanciaKm": 1241.31
   },
   {
-    "origenIATA": "BRU",
+    "origenIATA": "AMS",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1297.14
+  },
+  {
+    "origenIATA": "AMS",
     "destinoIATA": "LIS",
-    "distanciaKm": 2042.582,
-    "tiempoHoras": 20.101666666666667
+    "distanciaKm": 1847.25
+  },
+  {
+    "origenIATA": "AMS",
+    "destinoIATA": "VIE",
+    "distanciaKm": 959.29
+  },
+  {
+    "origenIATA": "AMS",
+    "destinoIATA": "ATH",
+    "distanciaKm": 2181.66
+  },
+  {
+    "origenIATA": "AMS",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 603.73
+  },
+  {
+    "origenIATA": "AMS",
+    "destinoIATA": "BRU",
+    "distanciaKm": 157.94
   },
   {
     "origenIATA": "AMS",
     "destinoIATA": "CPH",
-    "distanciaKm": 810.351,
-    "tiempoHoras": 9.681666666666667
+    "distanciaKm": 632.75
   },
   {
-    "origenIATA": "MAD",
+    "origenIATA": "AMS",
+    "destinoIATA": "WAW",
+    "distanciaKm": 1100.85
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "LHR",
+    "distanciaKm": 1443.86
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "CDG",
+    "distanciaKm": 1100.99
+  },
+  {
+    "origenIATA": "FCO",
     "destinoIATA": "FRA",
-    "distanciaKm": 1832.433,
-    "tiempoHoras": 17.58361111111111
+    "distanciaKm": 958.34
   },
   {
-    "origenIATA": "CDG",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1437.95,
-    "tiempoHoras": 14.455277777777777
+    "origenIATA": "FCO",
+    "destinoIATA": "MUC",
+    "distanciaKm": 729.64
   },
   {
-    "origenIATA": "MAD",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1909.961,
-    "tiempoHoras": 19.1625
+    "origenIATA": "FCO",
+    "destinoIATA": "MAD",
+    "distanciaKm": 1330.06
   },
   {
-    "origenIATA": "CDG",
+    "origenIATA": "FCO",
+    "destinoIATA": "BCN",
+    "distanciaKm": 847.08
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "AMS",
+    "distanciaKm": 1297.14
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "LIS",
+    "distanciaKm": 1839.44
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "VIE",
+    "distanciaKm": 779.49
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "ATH",
+    "distanciaKm": 1085.7
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 693.45
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "BRU",
+    "distanciaKm": 1172.79
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "CPH",
+    "distanciaKm": 1536.78
+  },
+  {
+    "origenIATA": "FCO",
+    "destinoIATA": "WAW",
+    "distanciaKm": 1326.81
+  },
+  {
+    "origenIATA": "LIS",
+    "destinoIATA": "LHR",
+    "distanciaKm": 1564.8
+  },
+  {
+    "origenIATA": "LIS",
+    "destinoIATA": "CDG",
+    "distanciaKm": 1470.17
+  },
+  {
+    "origenIATA": "LIS",
     "destinoIATA": "FRA",
-    "distanciaKm": 566.513,
-    "tiempoHoras": 5.7375
+    "distanciaKm": 1874.33
   },
   {
     "origenIATA": "LIS",
     "destinoIATA": "MUC",
-    "distanciaKm": 2449.286,
-    "tiempoHoras": 24.060277777777777
+    "distanciaKm": 1983.99
   },
   {
-    "origenIATA": "FCO",
+    "origenIATA": "LIS",
     "destinoIATA": "MAD",
-    "distanciaKm": 1925.386,
-    "tiempoHoras": 19.050555555555555
+    "distanciaKm": 513.67
   },
   {
-    "origenIATA": "MUC",
-    "destinoIATA": "WAW",
-    "distanciaKm": 1049.395,
-    "tiempoHoras": 10.322222222222223
+    "origenIATA": "LIS",
+    "destinoIATA": "BCN",
+    "distanciaKm": 994.53
   },
   {
-    "origenIATA": "CDG",
+    "origenIATA": "LIS",
+    "destinoIATA": "AMS",
+    "distanciaKm": 1847.25
+  },
+  {
+    "origenIATA": "LIS",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1839.44
+  },
+  {
+    "origenIATA": "LIS",
+    "destinoIATA": "VIE",
+    "distanciaKm": 2305.34
+  },
+  {
+    "origenIATA": "LIS",
     "destinoIATA": "ATH",
-    "distanciaKm": 2901.197,
-    "tiempoHoras": 28.844444444444445
+    "distanciaKm": 2870.07
   },
   {
-    "origenIATA": "MAD",
+    "origenIATA": "LIS",
     "destinoIATA": "ZRH",
-    "distanciaKm": 1642.542,
-    "tiempoHoras": 16.022777777777776
+    "distanciaKm": 1723.97
   },
   {
-    "origenIATA": "ATH",
-    "destinoIATA": "MAD",
-    "distanciaKm": 3688.482,
-    "tiempoHoras": 36.1575
+    "origenIATA": "LIS",
+    "destinoIATA": "BRU",
+    "distanciaKm": 1718.07
+  },
+  {
+    "origenIATA": "LIS",
+    "destinoIATA": "CPH",
+    "distanciaKm": 2472.14
+  },
+  {
+    "origenIATA": "LIS",
+    "destinoIATA": "WAW",
+    "distanciaKm": 2749.39
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "LHR",
+    "distanciaKm": 1274.53
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "CDG",
+    "distanciaKm": 1035.24
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "FRA",
+    "distanciaKm": 620.32
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "MUC",
+    "distanciaKm": 355.29
   },
   {
     "origenIATA": "VIE",
     "destinoIATA": "MAD",
-    "distanciaKm": 2398.213,
-    "tiempoHoras": 24.024166666666666
+    "distanciaKm": 1804.63
   },
   {
-    "origenIATA": "MAD",
-    "destinoIATA": "VIE",
-    "distanciaKm": 2377.729,
-    "tiempoHoras": 23.65
+    "origenIATA": "VIE",
+    "destinoIATA": "BCN",
+    "distanciaKm": 1369.35
   },
   {
-    "origenIATA": "MUC",
+    "origenIATA": "VIE",
     "destinoIATA": "AMS",
-    "distanciaKm": 824.064,
-    "tiempoHoras": 8.487222222222222
+    "distanciaKm": 959.29
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "FCO",
+    "distanciaKm": 779.49
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "LIS",
+    "distanciaKm": 2305.34
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "ATH",
+    "distanciaKm": 1278.91
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 602.87
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "BRU",
+    "distanciaKm": 924.79
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "CPH",
+    "distanciaKm": 876.76
+  },
+  {
+    "origenIATA": "VIE",
+    "destinoIATA": "WAW",
+    "distanciaKm": 548.93
+  },
+  {
+    "origenIATA": "ATH",
+    "destinoIATA": "LHR",
+    "distanciaKm": 2426.28
   },
   {
     "origenIATA": "ATH",
     "destinoIATA": "CDG",
-    "distanciaKm": 2883.782,
-    "tiempoHoras": 28.515555555555554
+    "distanciaKm": 2108.64
   },
   {
-    "origenIATA": "CDG",
+    "origenIATA": "ATH",
+    "destinoIATA": "FRA",
+    "distanciaKm": 1815.65
+  },
+  {
+    "origenIATA": "ATH",
+    "destinoIATA": "MUC",
+    "distanciaKm": 1517.68
+  },
+  {
+    "origenIATA": "ATH",
+    "destinoIATA": "MAD",
+    "distanciaKm": 2377.45
+  },
+  {
+    "origenIATA": "ATH",
+    "destinoIATA": "BCN",
+    "distanciaKm": 1904.11
+  },
+  {
+    "origenIATA": "ATH",
+    "destinoIATA": "AMS",
+    "distanciaKm": 2181.66
+  },
+  {
+    "origenIATA": "ATH",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1085.7
+  },
+  {
+    "origenIATA": "ATH",
     "destinoIATA": "LIS",
-    "distanciaKm": 1752.065,
-    "tiempoHoras": 17.156388888888888
+    "distanciaKm": 2870.07
   },
   {
-    "origenIATA": "FRA",
-    "destinoIATA": "WAW",
-    "distanciaKm": 1078.193,
-    "tiempoHoras": 10.787222222222223
-  },
-  {
-    "origenIATA": "BCN",
+    "origenIATA": "ATH",
     "destinoIATA": "VIE",
-    "distanciaKm": 1814.171,
-    "tiempoHoras": 18.25111111111111
+    "distanciaKm": 1278.91
   },
   {
-    "origenIATA": "LHR",
+    "origenIATA": "ATH",
     "destinoIATA": "ZRH",
-    "distanciaKm": 987.345,
-    "tiempoHoras": 10.868611111111111
+    "distanciaKm": 1638.69
   },
   {
-    "origenIATA": "CDG",
-    "destinoIATA": "VIE",
-    "distanciaKm": 1261.518,
-    "tiempoHoras": 12.993611111111111
-  },
-  {
-    "origenIATA": "VIE",
-    "destinoIATA": "LIS",
-    "distanciaKm": 2883.052,
-    "tiempoHoras": 28.75138888888889
-  },
-  {
-    "origenIATA": "FRA",
-    "destinoIATA": "ATH",
-    "distanciaKm": 2454.847,
-    "tiempoHoras": 24.365277777777777
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "VIE",
-    "distanciaKm": 1189.506,
-    "tiempoHoras": 12.4875
+    "origenIATA": "ATH",
+    "destinoIATA": "BRU",
+    "distanciaKm": 2101.35
   },
   {
     "origenIATA": "ATH",
     "destinoIATA": "CPH",
-    "distanciaKm": 2810.288,
-    "tiempoHoras": 29.838333333333335
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "ATH",
-    "distanciaKm": 2893.782,
-    "tiempoHoras": 28.865
+    "distanciaKm": 2139.63
   },
   {
     "origenIATA": "ATH",
-    "destinoIATA": "LIS",
-    "distanciaKm": 4232.76,
-    "tiempoHoras": 41.49111111111111
-  },
-  {
-    "origenIATA": "LHR",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1547.386,
-    "tiempoHoras": 15.534722222222221
-  },
-  {
-    "origenIATA": "BCN",
-    "destinoIATA": "FRA",
-    "distanciaKm": 1334.326,
-    "tiempoHoras": 13.375555555555556
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "FRA",
-    "distanciaKm": 1257.894,
-    "tiempoHoras": 12.879722222222222
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "MAD",
-    "distanciaKm": 2004.713,
-    "tiempoHoras": 19.85972222222222
-  },
-  {
-    "origenIATA": "MUC",
-    "destinoIATA": "BCN",
-    "distanciaKm": 1418.887,
-    "tiempoHoras": 14.266111111111112
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "MAD",
-    "distanciaKm": 1764.892,
-    "tiempoHoras": 17.67861111111111
-  },
-  {
-    "origenIATA": "FCO",
-    "destinoIATA": "LIS",
-    "distanciaKm": 2469.663,
-    "tiempoHoras": 24.384166666666665
-  },
-  {
-    "origenIATA": "AMS",
-    "destinoIATA": "FCO",
-    "distanciaKm": 1694.06,
-    "tiempoHoras": 17.32777777777778
-  },
-  {
-    "origenIATA": "MAD",
     "destinoIATA": "WAW",
-    "distanciaKm": 2835.789,
-    "tiempoHoras": 27.903055555555557
+    "distanciaKm": 1599.08
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "LHR",
+    "distanciaKm": 788.4
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "CDG",
+    "distanciaKm": 477.07
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "FRA",
+    "distanciaKm": 286.34
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "MUC",
+    "distanciaKm": 260.56
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "MAD",
+    "distanciaKm": 1238.48
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "BCN",
+    "distanciaKm": 856.01
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "AMS",
+    "distanciaKm": 603.73
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "FCO",
+    "distanciaKm": 693.45
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "LIS",
+    "distanciaKm": 1723.97
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "VIE",
+    "distanciaKm": 602.87
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "ATH",
+    "distanciaKm": 1638.69
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "BRU",
+    "distanciaKm": 483.65
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "CPH",
+    "distanciaKm": 950.09
+  },
+  {
+    "origenIATA": "ZRH",
+    "destinoIATA": "WAW",
+    "distanciaKm": 1031.02
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "LHR",
+    "distanciaKm": 349.99
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "CDG",
+    "distanciaKm": 251.86
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "FRA",
+    "distanciaKm": 304.75
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "MUC",
+    "distanciaKm": 596.89
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "MAD",
+    "distanciaKm": 1313.15
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "BCN",
+    "distanciaKm": 1083.66
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "AMS",
+    "distanciaKm": 157.94
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1172.79
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "LIS",
+    "distanciaKm": 1718.07
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "VIE",
+    "distanciaKm": 924.79
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "ATH",
+    "distanciaKm": 2101.35
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 483.65
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "CPH",
+    "distanciaKm": 754.12
+  },
+  {
+    "origenIATA": "BRU",
+    "destinoIATA": "WAW",
+    "distanciaKm": 1146.13
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "LHR",
+    "distanciaKm": 978.91
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "CDG",
+    "distanciaKm": 1003.83
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "FRA",
+    "distanciaKm": 678.53
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "MUC",
+    "distanciaKm": 809.9
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "MAD",
+    "distanciaKm": 2057.7
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "BCN",
+    "distanciaKm": 1768.23
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "AMS",
+    "distanciaKm": 632.75
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1536.78
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "LIS",
+    "distanciaKm": 2472.14
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "VIE",
+    "distanciaKm": 876.76
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "ATH",
+    "distanciaKm": 2139.63
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 950.09
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "BRU",
+    "distanciaKm": 754.12
+  },
+  {
+    "origenIATA": "CPH",
+    "destinoIATA": "WAW",
+    "distanciaKm": 665.88
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "LHR",
+    "distanciaKm": 1469.1
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "CDG",
+    "distanciaKm": 1342.76
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "FRA",
+    "distanciaKm": 896.25
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "MUC",
+    "distanciaKm": 777.34
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "MAD",
+    "distanciaKm": 2269.43
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "BCN",
+    "distanciaKm": 1869.39
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "AMS",
+    "distanciaKm": 1100.85
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "FCO",
+    "distanciaKm": 1326.81
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "LIS",
+    "distanciaKm": 2749.39
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "VIE",
+    "distanciaKm": 548.93
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "ATH",
+    "distanciaKm": 1599.08
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "ZRH",
+    "distanciaKm": 1031.02
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "BRU",
+    "distanciaKm": 1146.13
+  },
+  {
+    "origenIATA": "WAW",
+    "destinoIATA": "CPH",
+    "distanciaKm": 665.88
   }
 ]

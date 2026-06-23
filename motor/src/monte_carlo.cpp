@@ -1,16 +1,27 @@
+// motor/src/monte_carlo.cpp
 #include "monte_carlo.h"
+#include <algorithm>
+#include <cmath>
 
-ResultadoSimulacion MonteCarlo::simularDemanda(const ParametrosAeronave& params) {
-    // Inicializacion del generador de numeros aleatorios
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-    
-    std::normal_distribution<double> d(params.mu, params.sigma);
-    
-    int demanda = static_cast<int>(d(gen));
-    if (demanda < 0) demanda = 0; // La demanda no puede ser negativa
+MuestraDemanda MonteCarlo::simularArista(std::mt19937& gen,
+                                         const ParametrosAeronave& aeronave,
+                                         double precioBoletoEUR,
+                                         double costoTotalEUR) {
+    std::normal_distribution<double> normal(aeronave.mu, aeronave.sigma);
 
-    bool rentable = (demanda >= params.minThreshold);
+    // Una muestra de demanda del dia. NO se trunca por abajo: el modelo permite
+    // que algunos dias la ocupacion caiga bajo el umbral del 70%, lo que hace
+    // que la ruta se descarte (ese es el filtro de viabilidad de Monte Carlo).
+    // Por arriba se topa en la capacidad: ningun vuelo embarca mas pasajeros que
+    // sus asientos (demanda excedente = vuelo lleno).
+    double valor = normal(gen);
+    int pax = static_cast<int>(std::lround(valor));
+    pax = std::clamp(pax, 0, aeronave.capacidadMax);
 
-    return {demanda, rentable};
+    MuestraDemanda m;
+    m.pax           = pax;
+    m.ingresoEUR    = pax * precioBoletoEUR;
+    m.beneficioEUR  = m.ingresoEUR - costoTotalEUR;
+    m.factible      = (pax >= aeronave.umbralMin) && (m.beneficioEUR > 0.0);
+    return m;
 }

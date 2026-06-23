@@ -1,150 +1,81 @@
-# EuroSky Connect - Flight Route Optimization System
+# EuroSky Connect — Optimizador de itinerarios aéreos
 
-Sistema de optimización de rutas aéreas desarrollado para el curso de **Análisis y Diseño de Algoritmos (ADA)**. Este proyecto implementa una arquitectura híbrida que combina un **Backend en Node.js** para la gestión de datos y lógica de negocio, con un **Motor de Cálculo en C++** de alto rendimiento para la ejecución de algoritmos de grafos.
+Sistema en tres capas que determina el **itinerario diario óptimo** (ciclo cerrado, ≤ 8 h)
+de una aeronave en una red de aeropuertos europeos, maximizando el beneficio neto.
 
----
+- **Frontend** (pendiente): HTML5 + Bootstrap 5 + Maps JavaScript API.
+- **Backend**: Node.js + Express. Flujo `routes → controllers → services → engine`.
+- **Motor**: C++17. Implementa los algoritmos. Se comunica solo por `stdin/stdout` en JSON.
 
-## 🏗️ Arquitectura del Proyecto
+## Estructura
 
-El sistema utiliza comunicación mediante **tuberías (pipes)** donde el backend genera un contrato JSON que es procesado por el motor en tiempo real.
-
-```text
+```
 eurosky-connect/
 ├── backend/
-│   ├── scripts/
-│   │   └── generateInput.js    # Generador de contratos JSON (Input para el motor)
-│   └── services/
-│       └── costService.js      # Lógica de costos y rentabilidad (financiera)
-├── motor/
-│   ├── include/                # Cabeceras (.h) de los algoritmos
-│   ├── src/                    # Implementación lógica (.cpp)
-│   └── build/                  # Ejecutable compilado (.exe)
-└── README.md
+│   ├── app.js                       # servidor Express (monta routers + errorHandler)
+│   ├── config/                      # googleMaps.js, oauth.js
+│   ├── routes/                      # airport, aircraft, route(optimizacion), maps, report, auth
+│   ├── controllers/                 # un controlador por recurso
+│   ├── services/                    # reglas de negocio (CRUD, costos, optimizacion, reportes, auth)
+│   ├── repositories/                # acceso a JSON (jsonStore + uno por coleccion)
+│   ├── validators/                  # validacion de aeropuertos y aeronaves
+│   ├── middlewares/                 # errorHandler, authMiddleware
+│   ├── engine/motorBridge.js        # invoca el motor C++ (execFile + stdin/stdout)
+│   ├── utils/AppError.js
+│   ├── scripts/                     # generateInput.js, refreshRoutes.js
+│   └── data/                        # airports.json, aircraft.json, routes.json, result.json
+└── motor/
+    ├── src/  include/  build/  Makefile
 ```
 
----
+## Capas y dependencias (sin ciclos)
 
-## 🧠 Lógica y Algoritmos
+```
+routes → controllers → services → repositories → data(JSON)
+                           │
+                           └→ engine(motorBridge) → motor C++
+```
 
-El motor en C++ implementa cuatro componentes clave para el análisis de rutas:
+## API REST
 
-### Simulación Monte Carlo (`monte_carlo.cpp`)
-Filtra rutas basándose en la demanda estocástica antes de la ejecución. Solo las rutas estadísticamente rentables ingresan al grafo.
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/api/status` | Salud del orquestador |
+| GET/POST/PUT/DELETE | `/api/aeropuertos[/:iata]` | CRUD de aeropuertos |
+| GET/POST/PUT/DELETE | `/api/aeronaves[/:modelo]` | CRUD de aeronaves (la flota) |
+| POST | `/api/mapas/refresh` | Recalcula la matriz de distancias (`routes.json`) |
+| POST | `/api/optimizacion` | Optimiza la jornada · body `{aeronave?, origen, seed?}` |
+| GET | `/api/reportes/comparativa` | Tabla comparativa de algoritmos |
+| GET | `/api/reportes/itinerario.csv` | Itinerario óptimo en CSV (RF-16) |
+| GET | `/api/auth/login` · `/callback` · `/me` · `/logout` | Google OAuth 2.0 (RF-18) |
 
-### BFS - Búsqueda en Anchura (`bfs_dfs.cpp`)
-Valida la conectividad de la red. Asegura que el grafo esté íntegro y que los aeropuertos sean alcanzables.
+> Tras crear/editar/eliminar aeropuertos hay que llamar a `/api/mapas/refresh`
+> para recalcular las distancias.
 
-### DFS - Búsqueda en Profundidad (`bfs_dfs.cpp`)
-Aplica la poda de rutas bajo restricción temporal. Verifica si existe al menos un camino que no supere las **8 horas operativas**.
+## Pipeline del motor
 
-### Dijkstra (`dijkstra.cpp`)
-Encuentra la ruta óptima de menor costo operativo respetando la restricción máxima de tiempo establecida.
+1. **Monte Carlo** — simula demanda diaria, calcula `b(u,v)` y construye el grafo factible.
+2. **BFS** `O(V+E)` — valida conectividad desde el origen.
+3. **Floyd-Warshall** `O(V³)` — costos y tiempos mínimos all-pairs (referencia + poda).
+4. **Dijkstra** `O((V+E) log V)` — costo mínimo desde el origen.
+5. **DFS + backtracking** — ciclo cerrado de **máximo beneficio** (óptimo exacto).
+6. **Greedy** — heurística para comparar contra el óptimo.
 
----
-
-## 🚀 Cómo ejecutar el sistema
-
-### 1. Compilación
-
-Si realizas cambios en el código C++, recompila el motor desde la raíz del proyecto utilizando:
+## Puesta en marcha
 
 ```bash
-g++ -I motor/include motor/src/main.cpp motor/src/grafo.cpp motor/src/dijkstra.cpp motor/src/bfs_dfs.cpp motor/src/monte_carlo.cpp -o motor/build/motor.exe
+npm install
+make -C motor            # compila motor/build/motor
+npm run maps:refresh     # genera routes.json (offline si no hay API key)
+npm run engine:demo      # demo por consola
+npm start                # API REST en :3000
 ```
 
-### 2. Ejecución
+## Notas de modelado
 
-Para procesar un contrato JSON y obtener el informe técnico:
-
-```bash
-node backend/scripts/generateInput.js | motor/build/motor.exe
-```
-
----
-
-## 📊 Formato de Salida (Evidencias)
-
-El sistema genera un objeto JSON consolidado con los resultados del análisis:
-
-```json
-{
-  "origen": "LHR",
-  "destino": "CDG",
-  "red_conectada": true,
-  "dfs_viabilidad": {
-    "posible": true,
-    "ruta": ["LHR", "CDG"]
-  },
-  "dijkstra_optimo": {
-    "ruta": ["LHR", "CDG"],
-    "costo_total_eur": 2787.49,
-    "tiempo_total_horas": 5.3,
-    "ruta_valida": true
-  },
-  "limite_tiempo": 8.0
-}
-```
-
-### Campos principales
-
-| Campo | Descripción |
-|---------|-------------|
-| `origen` | Aeropuerto de partida |
-| `destino` | Aeropuerto de llegada |
-| `red_conectada` | Resultado de la validación BFS |
-| `dfs_viabilidad` | Resultado de la búsqueda DFS bajo restricción temporal |
-| `dijkstra_optimo` | Ruta óptima calculada por Dijkstra |
-| `limite_tiempo` | Tiempo máximo permitido para una ruta |
-
----
-
-## 🛠️ Notas de Desarrollo
-
-### Gestión de Datos
-No se utiliza una base de datos SQL en esta etapa. Los contratos JSON funcionan como mecanismo de intercambio de información entre el backend y el motor de cálculo.
-
-### Restricción Temporal
-El sistema aplica una restricción estricta de **8 horas de vuelo**. Si ninguna ruta cumple este criterio, el motor devolverá:
-
-```json
-{
-  "ruta_valida": false
-}
-```
-
-### Personalización de Costos
-Para modificar las variables financieras y de rentabilidad, actualizar:
-
-```text
-backend/services/costService.js
-```
-
-### Contribuciones
-Las mejoras relacionadas con algoritmos deben implementarse dentro del directorio:
-
-```text
-motor/src/
-```
-
-Manteniendo la separación entre la lógica de negocio (Node.js) y el motor de optimización (C++).
-
----
-
-## 📚 Tecnologías Utilizadas
-
-- Node.js
-- JavaScript
-- C++
-- Algoritmos de Grafos
-  - BFS
-  - DFS
-  - Dijkstra
-- Simulación Monte Carlo
-- JSON
-- Comunicación mediante Pipes
-
----
-
-## 🎯 Objetivo Académico
-
-Este proyecto busca demostrar la aplicación práctica de algoritmos de grafos y técnicas de simulación para resolver problemas de optimización de rutas aéreas, integrando conceptos de análisis algorítmico, complejidad computacional y diseño de sistemas híbridos.
+- **Tiempo de vuelo = `distancia / 840 km/h`**, nunca el tiempo de conducción.
+  La distancia es geográfica (círculo máximo / Routes API).
+- `C_leas = (leasing_usd_hora / 1.09) × tiempo_vuelo`.
+- Persistencia solo en JSON; sin base de datos (RR-06).
+- Claves (Maps / OAuth) en `.env` (ver `.env.example`), nunca en el repositorio.
+- OAuth se activa solo si hay credenciales; en su ausencia, las rutas protegidas quedan abiertas (modo prototipo).

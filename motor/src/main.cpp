@@ -1,83 +1,195 @@
+// motor/src/main.cpp
+//
+// Motor algoritmico de EuroSky Connect.
+// E/S exclusivamente por stdin/stdout en JSON (sin APIs, sin archivos).
+//
+// Pipeline:
+//   1. Monte Carlo  -> simula demanda y construye el grafo factible (b(u,v) > 0).
+//   2. BFS          -> valida conectividad de la red factible desde el origen.
+//   3. Floyd-Warshall -> all-pairs costo (referencia) y tiempo (poda del DFS).
+//   4. Dijkstra     -> costo minimo CT desde el origen (referencia RF-10).
+//   5. DFS exacto   -> mejor itinerario en ciclo cerrado por beneficio neto.
+//   6. Greedy       -> itinerario heuristico para comparar contra el optimo.
 #include <iostream>
-#include <vector>
 #include <string>
-#include <set>
+#include <random>
+#include <chrono>
 #include "json.hpp"
 #include "grafo.h"
-#include "dijkstra.h"
-#include "bfs_dfs.h"
 #include "monte_carlo.h"
+#include "bfs_dfs.h"
+#include "dijkstra.h"
+#include "floyd_warshall.h"
+#include "greedy.h"
 
 using json = nlohmann::json;
+using Reloj = std::chrono::high_resolution_clock;
+
+static double msDesde(Reloj::time_point t0) {
+    return std::chrono::duration<double, std::milli>(Reloj::now() - t0).count();
+}
+
+static json itinerarioAJson(const Itinerario& it) {
+    json tramos = json::array();
+    for (const auto& t : it.tramos) {
+        tramos.push_back({
+            {"origen", t.origen}, {"destino", t.destino},
+            {"tiempoVueloH", t.tiempoVueloH}, {"costoEUR", t.costoEUR},
+            {"beneficioEUR", t.beneficioEUR}, {"pax", t.pax}
+        });
+    }
+    return {
+        {"valido", it.valido},
+        {"ruta", it.ruta},
+        {"tramos", tramos},
+        {"tiempoJornadaH", it.tiempoJornadaH},
+        {"costoTotalEUR", it.costoTotalEUR},
+        {"beneficioTotalEUR", it.beneficioTotalEUR},
+        {"nodosExplorados", it.nodosExplorados},
+        {"execMs", it.execMs}
+    };
+}
 
 int main() {
     try {
         json contrato;
-        if (!(std::cin >> contrato)) return 0;
-
-        // 1. Preparar parametros de Monte Carlo
-        ParametrosAeronave params;
-        params.mu = contrato["aircraft"]["mu"];
-        params.sigma = contrato["aircraft"]["sigma"];
-        params.minThreshold = contrato["aircraft"]["minThreshold"];
-
-        GrafoRutas grafo;
-        
-        // 2. Construccion del grafo con filtrado de Monte Carlo
-        // Solo agregamos rutas que pasan la simulacion de demanda
-        for (const auto& ruta : contrato["routes"]) {
-            ResultadoSimulacion sim = MonteCarlo::simularDemanda(params);
-            
-            // Si la ruta es rentable, la agregamos al grafo
-            if (sim.esRentable) {
-                grafo.agregarArista(
-                    ruta["origin"], ruta["destination"],
-                    ruta["distanceKm"], ruta["flightTimeHours"],
-                    ruta["costTotalEUR"], ruta["ticketPriceEUR"]
-                );
-            }
+        if (!(std::cin >> contrato)) {
+            std::cout << json({{"status", "EMPTY_INPUT"}}).dump() << std::endl;
+            return 0;
         }
 
-        std::string origen = contrato["originIATA"];
-        std::string destino = "CDG"; // Tu destino de prueba
-        double limiteTiempo = contrato["maxFlightHours"];
+        const std::string origen   = contrato.at("originIATA").get<std::string>();
+        const double maxJornadaH    = contrato.value("maxJourneyHours", 8.0);
+        const double escalaH        = contrato.value("layoverHours", 0.5);
 
-        // 3. Algoritmos de Analisis
-        // BFS: Validacion de conectividad
-        std::vector<std::string> visitadosBFS = Busqueda::realizarBFS(grafo, origen);
-        
-        // DFS: Viabilidad temporal
-        std::vector<std::string> caminoDFS;
-        std::set<std::string> visitadosDFS;
-        bool rutaViable = Busqueda::realizarDFS(grafo, origen, destino, limiteTiempo, caminoDFS, visitadosDFS);
+        ParametrosAeronave aeronave;
+        aeronave.mu           = contrato.at("aircraft").at("mu");
+        aeronave.sigma        = contrato.at("aircraft").at("sigma");
+        aeronave.umbralMin    = contrato.at("aircraft").at("minThreshold");
+        aeronave.capacidadMax = contrato.at("aircraft").at("maxCapacity");
 
-        // Dijkstra: Optimizacion
-        ResultadoDijkstra res = Dijkstra::calcularRutaMasBarata(grafo, origen, destino, limiteTiempo);
+        // Semilla reproducible si se provee; aleatoria en caso contrario.
+        std::mt19937 gen;
+        if (contrato.contains("monteCarloSeed") && !contrato["monteCarloSeed"].is_null()) {
+            gen.seed(contrato["monteCarloSeed"].get<unsigned>());
+        } else {
+            std::random_device rd; gen.seed(rd());
+        }
 
-        // 4. Salida JSON estructurada
+        // ---- 1. Monte Carlo: construir grafo factible ----
+        auto t0 = Reloj::now();
+        GrafoRutas grafo;
+        json edgesMC = json::array();
+        int factibles = 0, descartadas = 0;
+
+        for (const auto& ruta : contrato.at("routes")) {
+            std::string u = ruta.at("origin");
+            std::string v = ruta.at("destination");
+            grafo.registrarNodo(u);
+            grafo.registrarNodo(v);
+
+            double precio = ruta.at("ticketPriceEUR");
+            double costo  = ruta.at("costTotalEUR");
+            MuestraDemanda m = MonteCarlo::simularArista(gen, aeronave, precio, costo);
+
+            if (m.factible) {
+                Arista a;
+                a.destino         = v;
+                a.distanciaKm     = ruta.at("distanceKm");
+                a.tiempoVueloH    = ruta.at("flightTimeHours");
+                a.costoEUR        = costo;
+                a.precioBoletoEUR = precio;
+                a.paxSimulados    = m.pax;
+                a.ingresoEUR      = m.ingresoEUR;
+                a.beneficioEUR    = m.beneficioEUR;
+                grafo.agregarArista(u, a);
+                ++factibles;
+            } else {
+                ++descartadas;
+            }
+            edgesMC.push_back({{"u", u}, {"v", v}, {"pax", m.pax},
+                               {"beneficioEUR", m.beneficioEUR}, {"factible", m.factible}});
+        }
+        double mcMs = msDesde(t0);
+
+        // ---- 2. BFS: conectividad ----
+        t0 = Reloj::now();
+        ResultadoBFS bfs = Busqueda::bfsConectividad(grafo, origen);
+        double bfsMs = msDesde(t0);
+
         json respuesta;
-        respuesta["origen"] = origen;
-        respuesta["destino"] = destino;
-        respuesta["limite_tiempo"] = limiteTiempo;
-        respuesta["red_conectada"] = (visitadosBFS.size() >= 5); // Verificamos conectividad minima
-        
-        respuesta["dfs_viabilidad"] = {
-            {"posible", rutaViable},
-            {"ruta", caminoDFS}
+        respuesta["origin"]      = origen;
+        respuesta["aircraft"]    = contrato.at("aircraft").value("model", "");
+        respuesta["constraints"] = {{"maxJourneyHours", maxJornadaH}, {"layoverHours", escalaH}};
+        respuesta["demandSimulation"] = {
+            {"feasibleEdges", factibles}, {"discardedEdges", descartadas},
+            {"execMs", mcMs}, {"edges", edgesMC}
         };
-        
-        respuesta["dijkstra_optimo"] = {
-            {"ruta", res.ruta},
-            {"costo_total_eur", res.costoTotal},
-            {"tiempo_total_horas", res.tiempoTotal},
-            {"ruta_valida", res.rutaValida}
+        respuesta["connectivity"] = {
+            {"reachableFromOrigin", bfs.alcanzables},
+            {"allReachable", bfs.todosAlcanzables},
+            {"originIsolated", bfs.origenAislado},
+            {"execMs", bfsMs}
         };
+
+        // Si el origen quedo aislado tras Monte Carlo, no hay itinerario posible.
+        if (bfs.origenAislado) {
+            respuesta["status"] = "NO_PROFITABLE_ROUTES";
+            std::cout << respuesta.dump() << std::endl;
+            return 0;
+        }
+
+        // ---- 3. Floyd-Warshall: all-pairs costo + tiempo ----
+        t0 = Reloj::now();
+        ResultadoFloyd floyd = FloydWarshall::calcular(grafo);
+        double floydMs = msDesde(t0);
+
+        // ---- 4. Dijkstra: costo minimo desde el origen ----
+        t0 = Reloj::now();
+        auto dij = Dijkstra::costosMinimosDesde(grafo, origen);
+        double dijMs = msDesde(t0);
+        json dijJson = json::object();
+        for (const auto& [iata, cm] : dij) {
+            if (iata == origen || !cm.alcanzable) continue;
+            dijJson[iata] = {{"costoEUR", cm.costoEUR}, {"tiempoVueloH", cm.tiempoVueloH}, {"ruta", cm.ruta}};
+        }
+
+        // ---- 5. DFS exacto ----
+        t0 = Reloj::now();
+        Itinerario dfs = Busqueda::dfsItinerarioOptimo(grafo, origen, maxJornadaH, escalaH, floyd.tiempo);
+        dfs.execMs = msDesde(t0);
+
+        // ---- 6. Greedy ----
+        t0 = Reloj::now();
+        Itinerario greedy = Greedy::construirItinerario(grafo, origen, maxJornadaH, escalaH, floyd.tiempo);
+        greedy.execMs = msDesde(t0);
+
+        respuesta["costReference"] = {
+            {"dijkstraFromOrigin", dijJson},
+            {"dijkstraExecMs", dijMs},
+            {"floydWarshall", {{"allPairsComputed", true}, {"nodos", grafo.numNodos()}, {"execMs", floydMs}}}
+        };
+        respuesta["itineraries"] = {
+            {"dfsExact", itinerarioAJson(dfs)},
+            {"greedy", itinerarioAJson(greedy)}
+        };
+        respuesta["comparison"] = json::array({
+            {{"algoritmo", "DFS (optimo)"}, {"valido", dfs.valido},
+             {"beneficioTotalEUR", dfs.beneficioTotalEUR}, {"costoTotalEUR", dfs.costoTotalEUR},
+             {"tiempoJornadaH", dfs.tiempoJornadaH}, {"tramos", dfs.tramos.size()},
+             {"nodosExplorados", dfs.nodosExplorados}, {"execMs", dfs.execMs}},
+            {{"algoritmo", "Greedy"}, {"valido", greedy.valido},
+             {"beneficioTotalEUR", greedy.beneficioTotalEUR}, {"costoTotalEUR", greedy.costoTotalEUR},
+             {"tiempoJornadaH", greedy.tiempoJornadaH}, {"tramos", greedy.tramos.size()},
+             {"nodosExplorados", greedy.nodosExplorados}, {"execMs", greedy.execMs}}
+        });
+        respuesta["status"] = dfs.valido ? "OK" : "NO_PROFITABLE_ROUTES";
 
         std::cout << respuesta.dump() << std::endl;
+        return 0;
 
     } catch (const std::exception& e) {
-        std::cout << json({{"error", e.what()}}).dump() << std::endl;
+        std::cout << json({{"status", "ENGINE_ERROR"}, {"error", e.what()}}).dump() << std::endl;
         return 1;
     }
-    return 0;
 }

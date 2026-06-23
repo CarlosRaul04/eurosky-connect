@@ -1,1 +1,1770 @@
-[]
+{
+  "aircraft": "Airbus A320neo",
+  "comparison": [
+    {
+      "algoritmo": "DFS (optimo)",
+      "beneficioTotalEUR": 150560.330000001,
+      "costoTotalEUR": 24124.799999999872,
+      "execMs": 28.2317,
+      "nodosExplorados": 34677,
+      "tiempoJornadaH": 7.950000000000269,
+      "tramos": 6,
+      "valido": true
+    },
+    {
+      "algoritmo": "Greedy",
+      "beneficioTotalEUR": 143564.02,
+      "costoTotalEUR": 27188.2,
+      "execMs": 0.0066,
+      "nodosExplorados": 4,
+      "tiempoJornadaH": 7.87,
+      "tramos": 4,
+      "valido": true
+    }
+  ],
+  "connectivity": {
+    "allReachable": true,
+    "execMs": 0.0119,
+    "originIsolated": false,
+    "reachableFromOrigin": [
+      "LHR",
+      "CDG",
+      "FRA",
+      "MUC",
+      "MAD",
+      "BCN",
+      "AMS",
+      "FCO",
+      "LIS",
+      "VIE",
+      "ATH",
+      "ZRH",
+      "BRU",
+      "CPH",
+      "WAW"
+    ]
+  },
+  "constraints": {
+    "layoverHours": 0.5,
+    "maxJourneyHours": 8
+  },
+  "costReference": {
+    "dijkstraExecMs": 0.0217,
+    "dijkstraFromOrigin": {
+      "AMS": {
+        "costoEUR": 2195.28,
+        "ruta": [
+          "LHR",
+          "AMS"
+        ],
+        "tiempoVueloH": 0.44
+      },
+      "ATH": {
+        "costoEUR": 11810.97,
+        "ruta": [
+          "LHR",
+          "ATH"
+        ],
+        "tiempoVueloH": 2.89
+      },
+      "BCN": {
+        "costoEUR": 5769.72,
+        "ruta": [
+          "LHR",
+          "BCN"
+        ],
+        "tiempoVueloH": 1.37
+      },
+      "BRU": {
+        "costoEUR": 2039.01,
+        "ruta": [
+          "LHR",
+          "BRU"
+        ],
+        "tiempoVueloH": 0.42
+      },
+      "CDG": {
+        "costoEUR": 2124.65,
+        "ruta": [
+          "LHR",
+          "CDG"
+        ],
+        "tiempoVueloH": 0.41
+      },
+      "CPH": {
+        "costoEUR": 5000.2,
+        "ruta": [
+          "LHR",
+          "CPH"
+        ],
+        "tiempoVueloH": 1.17
+      },
+      "FCO": {
+        "costoEUR": 7214.14,
+        "ruta": [
+          "LHR",
+          "FCO"
+        ],
+        "tiempoVueloH": 1.72
+      },
+      "FRA": {
+        "costoEUR": 3521.11,
+        "ruta": [
+          "LHR",
+          "FRA"
+        ],
+        "tiempoVueloH": 0.78
+      },
+      "LIS": {
+        "costoEUR": 7707.41,
+        "ruta": [
+          "LHR",
+          "LIS"
+        ],
+        "tiempoVueloH": 1.86
+      },
+      "MAD": {
+        "costoEUR": 6242.88,
+        "ruta": [
+          "LHR",
+          "MAD"
+        ],
+        "tiempoVueloH": 1.48
+      },
+      "MUC": {
+        "costoEUR": 4850.78,
+        "ruta": [
+          "LHR",
+          "MUC"
+        ],
+        "tiempoVueloH": 1.12
+      },
+      "VIE": {
+        "costoEUR": 6401.49,
+        "ruta": [
+          "LHR",
+          "VIE"
+        ],
+        "tiempoVueloH": 1.52
+      },
+      "WAW": {
+        "costoEUR": 7233.78,
+        "ruta": [
+          "LHR",
+          "WAW"
+        ],
+        "tiempoVueloH": 1.75
+      },
+      "ZRH": {
+        "costoEUR": 4137.15,
+        "ruta": [
+          "LHR",
+          "ZRH"
+        ],
+        "tiempoVueloH": 0.94
+      }
+    },
+    "floydWarshall": {
+      "allPairsComputed": true,
+      "execMs": 0.389,
+      "nodos": 15
+    }
+  },
+  "demandSimulation": {
+    "discardedEdges": 16,
+    "edges": [
+      {
+        "beneficioEUR": 15150.92,
+        "factible": true,
+        "pax": 221,
+        "u": "LHR",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 19766.57,
+        "factible": true,
+        "pax": 208,
+        "u": "LHR",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 22705.060000000005,
+        "factible": true,
+        "pax": 192,
+        "u": "LHR",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 29814.12,
+        "factible": true,
+        "pax": 204,
+        "u": "LHR",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 32629.409999999996,
+        "factible": true,
+        "pax": 231,
+        "u": "LHR",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 13869.99,
+        "factible": true,
+        "pax": 199,
+        "u": "LHR",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 37719.18,
+        "factible": true,
+        "pax": 226,
+        "u": "LHR",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 33657.94,
+        "factible": true,
+        "pax": 195,
+        "u": "LHR",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 32701.909999999996,
+        "factible": true,
+        "pax": 217,
+        "u": "LHR",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 62456.40999999999,
+        "factible": true,
+        "pax": 242,
+        "u": "LHR",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 22727.489999999998,
+        "factible": true,
+        "pax": 212,
+        "u": "LHR",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 13111.49,
+        "factible": true,
+        "pax": 193,
+        "u": "LHR",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 25717.24,
+        "factible": true,
+        "pax": 208,
+        "u": "LHR",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 31070.22,
+        "factible": true,
+        "pax": 190,
+        "u": "LHR",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 13174.84,
+        "factible": true,
+        "pax": 197,
+        "u": "CDG",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 13009.61,
+        "factible": false,
+        "pax": 174,
+        "u": "CDG",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 18456.659999999996,
+        "factible": true,
+        "pax": 192,
+        "u": "CDG",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 27227.840000000004,
+        "factible": true,
+        "pax": 208,
+        "u": "CDG",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 18990.399999999998,
+        "factible": false,
+        "pax": 174,
+        "u": "CDG",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 14614.64,
+        "factible": true,
+        "pax": 202,
+        "u": "CDG",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 26794.230000000003,
+        "factible": true,
+        "pax": 201,
+        "u": "CDG",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 33488.590000000004,
+        "factible": true,
+        "pax": 202,
+        "u": "CDG",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 28124.75,
+        "factible": true,
+        "pax": 217,
+        "u": "CDG",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 52243.19,
+        "factible": true,
+        "pax": 230,
+        "u": "CDG",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 15464.690000000002,
+        "factible": true,
+        "pax": 196,
+        "u": "CDG",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 12778.54,
+        "factible": true,
+        "pax": 212,
+        "u": "CDG",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 24965.679999999997,
+        "factible": true,
+        "pax": 200,
+        "u": "CDG",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 29591.19,
+        "factible": true,
+        "pax": 193,
+        "u": "CDG",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 20054.41,
+        "factible": true,
+        "pax": 212,
+        "u": "FRA",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 20103.21,
+        "factible": true,
+        "pax": 254,
+        "u": "FRA",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 13501.260000000002,
+        "factible": true,
+        "pax": 210,
+        "u": "FRA",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 36279.259999999995,
+        "factible": true,
+        "pax": 221,
+        "u": "FRA",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 28786.969999999998,
+        "factible": true,
+        "pax": 214,
+        "u": "FRA",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 12117.960000000001,
+        "factible": false,
+        "pax": 178,
+        "u": "FRA",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 26498.03,
+        "factible": true,
+        "pax": 216,
+        "u": "FRA",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 42769.340000000004,
+        "factible": true,
+        "pax": 211,
+        "u": "FRA",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 18239.339999999997,
+        "factible": true,
+        "pax": 199,
+        "u": "FRA",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 25842.910000000003,
+        "factible": false,
+        "pax": 145,
+        "u": "FRA",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 11613.2,
+        "factible": true,
+        "pax": 187,
+        "u": "FRA",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 14276.31,
+        "factible": true,
+        "pax": 219,
+        "u": "FRA",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 18205.25,
+        "factible": true,
+        "pax": 190,
+        "u": "FRA",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 24724.11,
+        "factible": true,
+        "pax": 211,
+        "u": "FRA",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 26964.180000000004,
+        "factible": true,
+        "pax": 223,
+        "u": "MUC",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 21011.43,
+        "factible": true,
+        "pax": 215,
+        "u": "MUC",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 13106.760000000002,
+        "factible": true,
+        "pax": 205,
+        "u": "MUC",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 35095.659999999996,
+        "factible": true,
+        "pax": 208,
+        "u": "MUC",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 26719.069999999996,
+        "factible": true,
+        "pax": 201,
+        "u": "MUC",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 22865.9,
+        "factible": true,
+        "pax": 234,
+        "u": "MUC",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 18419.480000000003,
+        "factible": true,
+        "pax": 185,
+        "u": "MUC",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 47118.350000000006,
+        "factible": true,
+        "pax": 220,
+        "u": "MUC",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 16381.509999999998,
+        "factible": true,
+        "pax": 233,
+        "u": "MUC",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 33883.94,
+        "factible": true,
+        "pax": 200,
+        "u": "MUC",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 11684.939999999999,
+        "factible": true,
+        "pax": 194,
+        "u": "MUC",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 23733.94,
+        "factible": true,
+        "pax": 255,
+        "u": "MUC",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 19940.77,
+        "factible": true,
+        "pax": 187,
+        "u": "MUC",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 21398.3,
+        "factible": true,
+        "pax": 202,
+        "u": "MUC",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 27286.37,
+        "factible": true,
+        "pax": 191,
+        "u": "MAD",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 18788.5,
+        "factible": false,
+        "pax": 155,
+        "u": "MAD",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 37582.659999999996,
+        "factible": true,
+        "pax": 228,
+        "u": "MAD",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 35260.15,
+        "factible": true,
+        "pax": 209,
+        "u": "MAD",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 18522.8,
+        "factible": true,
+        "pax": 227,
+        "u": "MAD",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 32732.7,
+        "factible": true,
+        "pax": 200,
+        "u": "MAD",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 30959.910000000003,
+        "factible": true,
+        "pax": 202,
+        "u": "MAD",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 19470.12,
+        "factible": true,
+        "pax": 230,
+        "u": "MAD",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 38549.24,
+        "factible": true,
+        "pax": 199,
+        "u": "MAD",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 54754.88999999999,
+        "factible": true,
+        "pax": 220,
+        "u": "MAD",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 23159.809999999998,
+        "factible": false,
+        "pax": 167,
+        "u": "MAD",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 40430.2,
+        "factible": true,
+        "pax": 255,
+        "u": "MAD",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 41291.71000000001,
+        "factible": true,
+        "pax": 193,
+        "u": "MAD",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 56169,
+        "factible": true,
+        "pax": 232,
+        "u": "MAD",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 22571.839999999997,
+        "factible": false,
+        "pax": 172,
+        "u": "BCN",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 20319.019999999997,
+        "factible": true,
+        "pax": 185,
+        "u": "BCN",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 31902.569999999996,
+        "factible": true,
+        "pax": 234,
+        "u": "BCN",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 25536.409999999996,
+        "factible": true,
+        "pax": 194,
+        "u": "BCN",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 15242.900000000001,
+        "factible": true,
+        "pax": 192,
+        "u": "BCN",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 31985.16,
+        "factible": true,
+        "pax": 217,
+        "u": "BCN",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 21851.160000000003,
+        "factible": true,
+        "pax": 197,
+        "u": "BCN",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 17853.96,
+        "factible": false,
+        "pax": 153,
+        "u": "BCN",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 39853.4,
+        "factible": true,
+        "pax": 245,
+        "u": "BCN",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 39556.399999999994,
+        "factible": true,
+        "pax": 196,
+        "u": "BCN",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 22106.05,
+        "factible": true,
+        "pax": 198,
+        "u": "BCN",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 31895.27,
+        "factible": true,
+        "pax": 235,
+        "u": "BCN",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 29483.42,
+        "factible": false,
+        "pax": 163,
+        "u": "BCN",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 39012.259999999995,
+        "factible": true,
+        "pax": 196,
+        "u": "BCN",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 14618.019999999999,
+        "factible": true,
+        "pax": 210,
+        "u": "AMS",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 17678.57,
+        "factible": true,
+        "pax": 239,
+        "u": "AMS",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 16073.15,
+        "factible": true,
+        "pax": 227,
+        "u": "AMS",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 21559.3,
+        "factible": true,
+        "pax": 222,
+        "u": "AMS",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 34626.57,
+        "factible": true,
+        "pax": 209,
+        "u": "AMS",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 31742.079999999998,
+        "factible": true,
+        "pax": 215,
+        "u": "AMS",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 35682.729999999996,
+        "factible": true,
+        "pax": 231,
+        "u": "AMS",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 42512.119999999995,
+        "factible": true,
+        "pax": 212,
+        "u": "AMS",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 22741.600000000002,
+        "factible": true,
+        "pax": 190,
+        "u": "AMS",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 45344.56,
+        "factible": true,
+        "pax": 200,
+        "u": "AMS",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 13125.359999999999,
+        "factible": false,
+        "pax": 154,
+        "u": "AMS",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 10001.119999999999,
+        "factible": true,
+        "pax": 194,
+        "u": "AMS",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 16259.059999999998,
+        "factible": true,
+        "pax": 179,
+        "u": "AMS",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 27051.97,
+        "factible": true,
+        "pax": 202,
+        "u": "AMS",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 31942.22,
+        "factible": true,
+        "pax": 198,
+        "u": "FCO",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 25395.350000000002,
+        "factible": true,
+        "pax": 193,
+        "u": "FCO",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 29065.59,
+        "factible": true,
+        "pax": 234,
+        "u": "FCO",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 19722.340000000004,
+        "factible": true,
+        "pax": 196,
+        "u": "FCO",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 27440.020000000004,
+        "factible": true,
+        "pax": 183,
+        "u": "FCO",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 20559.36,
+        "factible": true,
+        "pax": 187,
+        "u": "FCO",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 26478.23,
+        "factible": true,
+        "pax": 181,
+        "u": "FCO",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 46728.950000000004,
+        "factible": true,
+        "pax": 230,
+        "u": "FCO",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 20212.91,
+        "factible": true,
+        "pax": 193,
+        "u": "FCO",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 34560.53,
+        "factible": true,
+        "pax": 251,
+        "u": "FCO",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 19917.77,
+        "factible": true,
+        "pax": 203,
+        "u": "FCO",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 30228.92,
+        "factible": true,
+        "pax": 214,
+        "u": "FCO",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 36046.850000000006,
+        "factible": true,
+        "pax": 209,
+        "u": "FCO",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 37510.84999999999,
+        "factible": true,
+        "pax": 237,
+        "u": "FCO",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 32095.16,
+        "factible": true,
+        "pax": 189,
+        "u": "LIS",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 36526.11,
+        "factible": true,
+        "pax": 218,
+        "u": "LIS",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 35746.3,
+        "factible": true,
+        "pax": 183,
+        "u": "LIS",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 49858.990000000005,
+        "factible": true,
+        "pax": 231,
+        "u": "LIS",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 18638.12,
+        "factible": true,
+        "pax": 222,
+        "u": "LIS",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 25433.36,
+        "factible": true,
+        "pax": 204,
+        "u": "LIS",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 37254.92,
+        "factible": true,
+        "pax": 191,
+        "u": "LIS",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 41075.13,
+        "factible": true,
+        "pax": 207,
+        "u": "LIS",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 38622.59999999999,
+        "factible": false,
+        "pax": 170,
+        "u": "LIS",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 62918.75,
+        "factible": true,
+        "pax": 216,
+        "u": "LIS",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 38504.28999999999,
+        "factible": true,
+        "pax": 205,
+        "u": "LIS",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 37274.06,
+        "factible": true,
+        "pax": 200,
+        "u": "LIS",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 57172.31999999999,
+        "factible": true,
+        "pax": 222,
+        "u": "LIS",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 52443.99,
+        "factible": true,
+        "pax": 192,
+        "u": "LIS",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 32842.31,
+        "factible": true,
+        "pax": 219,
+        "u": "VIE",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 31236.230000000003,
+        "factible": true,
+        "pax": 238,
+        "u": "VIE",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 21751.260000000002,
+        "factible": true,
+        "pax": 232,
+        "u": "VIE",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 14058.189999999999,
+        "factible": true,
+        "pax": 204,
+        "u": "VIE",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 40467.32,
+        "factible": true,
+        "pax": 207,
+        "u": "VIE",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 38739.62,
+        "factible": true,
+        "pax": 239,
+        "u": "VIE",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 22079.52,
+        "factible": true,
+        "pax": 186,
+        "u": "VIE",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 23723.629999999997,
+        "factible": true,
+        "pax": 221,
+        "u": "VIE",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 52784.92,
+        "factible": true,
+        "pax": 218,
+        "u": "VIE",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 31931.910000000003,
+        "factible": true,
+        "pax": 212,
+        "u": "VIE",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 23109.649999999998,
+        "factible": true,
+        "pax": 248,
+        "u": "VIE",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 24999.64,
+        "factible": true,
+        "pax": 210,
+        "u": "VIE",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 23181.33,
+        "factible": true,
+        "pax": 203,
+        "u": "VIE",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 19512.719999999998,
+        "factible": true,
+        "pax": 223,
+        "u": "VIE",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 55434.83,
+        "factible": true,
+        "pax": 220,
+        "u": "ATH",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 39835.44,
+        "factible": true,
+        "pax": 185,
+        "u": "ATH",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 38677.79,
+        "factible": true,
+        "pax": 199,
+        "u": "ATH",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 32562.3,
+        "factible": true,
+        "pax": 194,
+        "u": "ATH",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 47176.88999999999,
+        "factible": true,
+        "pax": 195,
+        "u": "ATH",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 39286.95,
+        "factible": true,
+        "pax": 195,
+        "u": "ATH",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 50254.200000000004,
+        "factible": true,
+        "pax": 218,
+        "u": "ATH",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 28442.190000000002,
+        "factible": true,
+        "pax": 213,
+        "u": "ATH",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 72542.92,
+        "factible": true,
+        "pax": 243,
+        "u": "ATH",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 29713.75,
+        "factible": true,
+        "pax": 200,
+        "u": "ATH",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 39408.49,
+        "factible": true,
+        "pax": 216,
+        "u": "ATH",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 47685.35,
+        "factible": true,
+        "pax": 214,
+        "u": "ATH",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 41540.83,
+        "factible": true,
+        "pax": 189,
+        "u": "ATH",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 26478.19,
+        "factible": false,
+        "pax": 159,
+        "u": "ATH",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 25462.050000000003,
+        "factible": true,
+        "pax": 235,
+        "u": "ZRH",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 17141.81,
+        "factible": true,
+        "pax": 215,
+        "u": "ZRH",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 14667.7,
+        "factible": true,
+        "pax": 230,
+        "u": "ZRH",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 12999.48,
+        "factible": true,
+        "pax": 213,
+        "u": "ZRH",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 23386.04,
+        "factible": false,
+        "pax": 168,
+        "u": "ZRH",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 20431.969999999998,
+        "factible": true,
+        "pax": 185,
+        "u": "ZRH",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 21278.93,
+        "factible": true,
+        "pax": 231,
+        "u": "ZRH",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 24598.97,
+        "factible": true,
+        "pax": 243,
+        "u": "ZRH",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 40910.69,
+        "factible": true,
+        "pax": 215,
+        "u": "ZRH",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 20385.329999999998,
+        "factible": true,
+        "pax": 222,
+        "u": "ZRH",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 35313.55,
+        "factible": true,
+        "pax": 197,
+        "u": "ZRH",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 17831.42,
+        "factible": true,
+        "pax": 220,
+        "u": "ZRH",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 23315.859999999997,
+        "factible": true,
+        "pax": 195,
+        "u": "ZRH",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 30433.910000000003,
+        "factible": true,
+        "pax": 232,
+        "u": "ZRH",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 14010.49,
+        "factible": true,
+        "pax": 207,
+        "u": "BRU",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 14167.94,
+        "factible": true,
+        "pax": 234,
+        "u": "BRU",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 14456.869999999999,
+        "factible": true,
+        "pax": 222,
+        "u": "BRU",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 21082.44,
+        "factible": true,
+        "pax": 230,
+        "u": "BRU",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 30315.45,
+        "factible": true,
+        "pax": 200,
+        "u": "BRU",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 27487.669999999995,
+        "factible": true,
+        "pax": 207,
+        "u": "BRU",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 11031.15,
+        "factible": true,
+        "pax": 213,
+        "u": "BRU",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 22464.46,
+        "factible": false,
+        "pax": 168,
+        "u": "BRU",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 34616.18,
+        "factible": true,
+        "pax": 188,
+        "u": "BRU",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 28137.7,
+        "factible": true,
+        "pax": 232,
+        "u": "BRU",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 44230.399999999994,
+        "factible": true,
+        "pax": 201,
+        "u": "BRU",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 17997.82,
+        "factible": true,
+        "pax": 222,
+        "u": "BRU",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 21147.14,
+        "factible": true,
+        "pax": 204,
+        "u": "BRU",
+        "v": "CPH"
+      },
+      {
+        "beneficioEUR": 29836.129999999997,
+        "factible": true,
+        "pax": 214,
+        "u": "BRU",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 23429.72,
+        "factible": true,
+        "pax": 194,
+        "u": "CPH",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 26349.879999999997,
+        "factible": true,
+        "pax": 210,
+        "u": "CPH",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 18603.81,
+        "factible": true,
+        "pax": 194,
+        "u": "CPH",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 19136.23,
+        "factible": true,
+        "pax": 181,
+        "u": "CPH",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 46628.71000000001,
+        "factible": true,
+        "pax": 213,
+        "u": "CPH",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 35141.659999999996,
+        "factible": true,
+        "pax": 187,
+        "u": "CPH",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 19905.46,
+        "factible": true,
+        "pax": 213,
+        "u": "CPH",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 36245.9,
+        "factible": true,
+        "pax": 210,
+        "u": "CPH",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 56306.5,
+        "factible": true,
+        "pax": 219,
+        "u": "CPH",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 26046.57,
+        "factible": true,
+        "pax": 224,
+        "u": "CPH",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 47373.39000000001,
+        "factible": true,
+        "pax": 210,
+        "u": "CPH",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 20096.64,
+        "factible": false,
+        "pax": 173,
+        "u": "CPH",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 20512.39,
+        "factible": true,
+        "pax": 199,
+        "u": "CPH",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 21488.62,
+        "factible": true,
+        "pax": 220,
+        "u": "CPH",
+        "v": "WAW"
+      },
+      {
+        "beneficioEUR": 37211.42,
+        "factible": true,
+        "pax": 222,
+        "u": "WAW",
+        "v": "LHR"
+      },
+      {
+        "beneficioEUR": 32947.48999999999,
+        "factible": true,
+        "pax": 212,
+        "u": "WAW",
+        "v": "CDG"
+      },
+      {
+        "beneficioEUR": 22356.67,
+        "factible": true,
+        "pax": 195,
+        "u": "WAW",
+        "v": "FRA"
+      },
+      {
+        "beneficioEUR": 21027.28,
+        "factible": true,
+        "pax": 200,
+        "u": "WAW",
+        "v": "MUC"
+      },
+      {
+        "beneficioEUR": 62750.72,
+        "factible": true,
+        "pax": 255,
+        "u": "WAW",
+        "v": "MAD"
+      },
+      {
+        "beneficioEUR": 45584.27,
+        "factible": true,
+        "pax": 223,
+        "u": "WAW",
+        "v": "BCN"
+      },
+      {
+        "beneficioEUR": 29459.410000000003,
+        "factible": true,
+        "pax": 218,
+        "u": "WAW",
+        "v": "AMS"
+      },
+      {
+        "beneficioEUR": 27369.55,
+        "factible": true,
+        "pax": 183,
+        "u": "WAW",
+        "v": "FCO"
+      },
+      {
+        "beneficioEUR": 45232.96,
+        "factible": false,
+        "pax": 171,
+        "u": "WAW",
+        "v": "LIS"
+      },
+      {
+        "beneficioEUR": 16812.84,
+        "factible": true,
+        "pax": 197,
+        "u": "WAW",
+        "v": "VIE"
+      },
+      {
+        "beneficioEUR": 32267.49,
+        "factible": true,
+        "pax": 186,
+        "u": "WAW",
+        "v": "ATH"
+      },
+      {
+        "beneficioEUR": 22940.23,
+        "factible": true,
+        "pax": 184,
+        "u": "WAW",
+        "v": "ZRH"
+      },
+      {
+        "beneficioEUR": 28065.43,
+        "factible": true,
+        "pax": 204,
+        "u": "WAW",
+        "v": "BRU"
+      },
+      {
+        "beneficioEUR": 20945.62,
+        "factible": true,
+        "pax": 216,
+        "u": "WAW",
+        "v": "CPH"
+      }
+    ],
+    "execMs": 0.372,
+    "feasibleEdges": 194
+  },
+  "itineraries": {
+    "dfsExact": {
+      "beneficioTotalEUR": 150560.330000001,
+      "costoTotalEUR": 24124.799999999872,
+      "execMs": 28.2317,
+      "nodosExplorados": 34677,
+      "ruta": [
+        "LHR",
+        "BCN",
+        "BRU",
+        "MUC",
+        "VIE",
+        "ZRH",
+        "LHR"
+      ],
+      "tiempoJornadaH": 7.950000000000269,
+      "tramos": [
+        {
+          "beneficioEUR": 32629.409999999996,
+          "costoEUR": 5769.72,
+          "destino": "BCN",
+          "origen": "LHR",
+          "pax": 231,
+          "tiempoVueloH": 1.37
+        },
+        {
+          "beneficioEUR": 31895.27,
+          "costoEUR": 5516.73,
+          "destino": "BRU",
+          "origen": "BCN",
+          "pax": 235,
+          "tiempoVueloH": 1.29
+        },
+        {
+          "beneficioEUR": 21082.44,
+          "costoEUR": 3219.36,
+          "destino": "MUC",
+          "origen": "BRU",
+          "pax": 230,
+          "tiempoVueloH": 0.71
+        },
+        {
+          "beneficioEUR": 16381.509999999998,
+          "costoEUR": 2044.13,
+          "destino": "VIE",
+          "origen": "MUC",
+          "pax": 233,
+          "tiempoVueloH": 0.42
+        },
+        {
+          "beneficioEUR": 23109.649999999998,
+          "costoEUR": 3257.71,
+          "destino": "ZRH",
+          "origen": "VIE",
+          "pax": 248,
+          "tiempoVueloH": 0.72
+        },
+        {
+          "beneficioEUR": 25462.050000000003,
+          "costoEUR": 4317.15,
+          "destino": "LHR",
+          "origen": "ZRH",
+          "pax": 235,
+          "tiempoVueloH": 0.94
+        }
+      ],
+      "valido": true
+    },
+    "greedy": {
+      "beneficioTotalEUR": 143564.02,
+      "costoTotalEUR": 27188.2,
+      "execMs": 0.0066,
+      "nodosExplorados": 4,
+      "ruta": [
+        "LHR",
+        "ATH",
+        "AMS",
+        "CDG",
+        "LHR"
+      ],
+      "tiempoJornadaH": 7.87,
+      "tramos": [
+        {
+          "beneficioEUR": 62456.40999999999,
+          "costoEUR": 11810.97,
+          "destino": "ATH",
+          "origen": "LHR",
+          "pax": 242,
+          "tiempoVueloH": 2.89
+        },
+        {
+          "beneficioEUR": 50254.200000000004,
+          "costoEUR": 10781.44,
+          "destino": "AMS",
+          "origen": "ATH",
+          "pax": 218,
+          "tiempoVueloH": 2.6
+        },
+        {
+          "beneficioEUR": 17678.57,
+          "costoEUR": 2371.14,
+          "destino": "CDG",
+          "origen": "AMS",
+          "pax": 239,
+          "tiempoVueloH": 0.47
+        },
+        {
+          "beneficioEUR": 13174.84,
+          "costoEUR": 2224.65,
+          "destino": "LHR",
+          "origen": "CDG",
+          "pax": 197,
+          "tiempoVueloH": 0.41
+        }
+      ],
+      "valido": true
+    }
+  },
+  "origin": "LHR",
+  "status": "OK"
+}

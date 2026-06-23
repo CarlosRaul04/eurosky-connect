@@ -1,30 +1,28 @@
+// motor/src/dijkstra.h
+//
+// Camino de menor costo operativo (CT) desde un origen a todos los demas
+// aeropuertos del grafo factible, con cola de prioridad (min-heap).
+// Complejidad temporal: O((V + E) log V).  Complejidad espacial: O(V).
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
 #include "grafo.h"
-#include <vector>
 #include <string>
+#include <vector>
+#include <unordered_map>
 
-/**
- * Estructura que almacena el resultado del calculo de la ruta optima.
- */
-struct ResultadoDijkstra {
-    std::vector<std::string> ruta;
-    double costoTotal;
-    double tiempoTotal;
-    bool rutaValida;
+struct CaminoMinimo {
+    double costoEUR;
+    double tiempoVueloH;            // tiempo acumulado del camino de menor costo
+    std::vector<std::string> ruta; // origen -> ... -> destino
+    bool   alcanzable;
 };
 
 class Dijkstra {
 public:
-    /**
-     * Calcula la ruta mas economica desde un origen a un destino, 
-     * aplicando penalizaciones por rentabilidad y poda por restriccion de tiempo.
-     */
-    static ResultadoDijkstra calcularRutaMasBarata(const GrafoRutas& grafo, 
-                                                   const std::string& origen, 
-                                                   const std::string& destino, 
-                                                   double tiempoMaximo);
+    // Devuelve, por cada nodo alcanzable, su camino de menor costo desde origen.
+    static std::unordered_map<std::string, CaminoMinimo>
+    costosMinimosDesde(const GrafoRutas& grafo, const std::string& origen);
 };
 
-#endif
+#endif // DIJKSTRA_H

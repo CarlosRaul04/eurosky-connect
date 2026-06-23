@@ -1,17 +1,21 @@
 {
   "name": "eurosky-connect",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Optimizador de itinerarios aereos diarios (ADA) - backend Node.js + motor C++.",
+  "main": "backend/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/app.js",
+    "maps:refresh": "node backend/scripts/refreshRoutes.js",
+    "build:motor:linux": "make -C motor",
+    "build:motor:win": "motor\\build.bat",
+    "engine:demo:linux": "node backend/scripts/generateInput.js \"Airbus A320neo\" FRA 42 | ./motor/build/motor",
+    "engine:demo:win": "backend\\scripts\\engine-demo.bat"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["grafos", "dijkstra", "floyd-warshall", "monte-carlo", "optimizacion", "express"],
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
   }
 }
