@@ -15,7 +15,24 @@
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-<div class="app">
+
+<!-- ===== Pantalla de acceso ===== -->
+<div id="login-screen" class="login" hidden>
+    <div class="login__card">
+        <span class="brand__mark login__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+        </span>
+        <h1 class="login__title">EuroSky <b>Connect</b></h1>
+        <p class="login__sub">Optimización de jornada para flotas europeas. Inicia sesión para planificar y comparar itinerarios.</p>
+        <button id="btn-login" class="btn btn--primary login__btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M21.35 11.1H12v3.8h5.35c-.25 1.45-1.78 4.25-5.35 4.25-3.22 0-5.85-2.66-5.85-5.95S8.78 7.25 12 7.25c1.83 0 3.06.78 3.76 1.45l2.57-2.47C16.66 4.6 14.55 3.7 12 3.7 6.92 3.7 2.8 7.82 2.8 12.9s4.12 9.2 9.2 9.2c5.31 0 8.82-3.73 8.82-8.98 0-.6-.07-1.06-.17-1.52z"/></svg>
+            <span id="login-btn-text">Continuar con Google</span>
+        </button>
+        <p id="login-note" class="login__note"></p>
+    </div>
+</div>
+
+<div class="app" id="app-shell" hidden>
 
     <!-- ===== Topbar ===== -->
     <header class="topbar">
@@ -29,11 +46,20 @@
             </div>
         </div>
 
-        <nav class="tabs" role="tablist" aria-label="Secciones">
-            <button class="tab is-active" data-view="optimizer" role="tab">Optimizador</button>
-            <button class="tab" data-view="airports" role="tab">Aeropuertos</button>
-            <button class="tab" data-view="fleet" role="tab">Flota</button>
-        </nav>
+        <div class="topbar__right">
+            <nav class="tabs" role="tablist" aria-label="Secciones">
+                <button class="tab is-active" data-view="optimizer" role="tab">Optimizador</button>
+                <button class="tab" data-view="airports" role="tab">Aeropuertos</button>
+                <button class="tab" data-view="fleet" role="tab">Flota</button>
+            </nav>
+            <div id="user-chip" class="user-chip" hidden>
+                <img id="user-avatar" class="user-chip__img" alt="" />
+                <span id="user-name" class="user-chip__name"></span>
+                <button id="btn-logout" class="btn-icon" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+                </button>
+            </div>
+        </div>
     </header>
 
     <!-- ===================== VISTA: OPTIMIZADOR ===================== -->

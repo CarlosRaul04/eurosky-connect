@@ -17,7 +17,7 @@ const MapView = (() => {
 
     // ---------- Implementacion SVG ----------
     const svgImpl = {
-        W: 820, H: 440, pad: 46, pos: {},
+        W: 820, H: 440, pad: 46, pos: {}, _p: null,
         project() {
             const lats = airports.map((a) => a.latitud);
             const lons = airports.map((a) => a.longitud);
@@ -31,13 +31,33 @@ const MapView = (() => {
             const scale = Math.min((this.W - 2 * this.pad) / spanX, (this.H - 2 * this.pad) / spanY);
             const offX = (this.W - spanX * scale) / 2;
             const offY = (this.H - spanY * scale) / 2;
+            this._p = { k, minLx, maxLat, scale, offX, offY, minLat, maxLat, minLon, maxLon };
             this.pos = {};
-            airports.forEach((a) => {
-                this.pos[a.iata] = {
-                    x: offX + (lx(a.longitud) - minLx) * scale,
-                    y: offY + (maxLat - a.latitud) * scale,
-                };
-            });
+            airports.forEach((a) => { this.pos[a.iata] = this.toXY(a.latitud, a.longitud); });
+        },
+        toXY(lat, lon) {
+            const p = this._p;
+            return { x: p.offX + (lon * p.k - p.minLx) * p.scale, y: p.offY + (p.maxLat - lat) * p.scale };
+        },
+        graticule(svg, ns) {
+            const p = this._p;
+            const step = 5; // grados
+            const lo = (v, s) => Math.ceil(v / s) * s;
+            const line = (x1, y1, x2, y2, major) => {
+                const l = document.createElementNS(ns, 'line');
+                l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+                l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+                l.setAttribute('class', major ? 'geo-graticule geo-graticule--major' : 'geo-graticule');
+                svg.appendChild(l);
+            };
+            for (let lon = lo(p.minLon, step); lon <= p.maxLon; lon += step) {
+                const a = this.toXY(p.maxLat, lon), b = this.toXY(p.minLat, lon);
+                line(a.x, a.y, b.x, b.y, lon % 10 === 0);
+            }
+            for (let lat = lo(p.minLat, step); lat <= p.maxLat; lat += step) {
+                const a = this.toXY(lat, p.minLon), b = this.toXY(lat, p.maxLon);
+                line(a.x, a.y, b.x, b.y, lat % 10 === 0);
+            }
         },
         render() {
             this.project();
@@ -45,6 +65,8 @@ const MapView = (() => {
             const svg = document.createElementNS(ns, 'svg');
             svg.setAttribute('viewBox', `0 0 ${this.W} ${this.H}`);
             svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+            this.graticule(svg, ns); // fondo: reticula geografica
 
             const gRoute = document.createElementNS(ns, 'path');
             gRoute.setAttribute('class', 'geo-route');

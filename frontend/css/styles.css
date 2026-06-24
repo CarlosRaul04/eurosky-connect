@@ -244,3 +244,67 @@ details.adv .adv__body { padding-top: 12px; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
 }
+
+/* ---------- Topbar right / user chip ---------- */
+.topbar__right { display: flex; align-items: center; gap: 12px; }
+.user-chip { display: flex; align-items: center; gap: 9px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 6px 4px 4px; }
+.user-chip__img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; background: var(--primary-soft); }
+.user-chip__name { font-size: .82rem; font-weight: 500; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ---------- Login screen ---------- */
+.login { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 24px;
+    background:
+        radial-gradient(900px 500px at 15% -10%, var(--primary-soft), transparent 60%),
+        radial-gradient(800px 460px at 100% 110%, #fde7d8, transparent 55%),
+        var(--bg);
+}
+.login__card { width: 100%; max-width: 380px; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 20px; box-shadow: var(--shadow); padding: 34px 30px; text-align: center; animation: fade .35s ease; }
+.login__mark { width: 46px; height: 46px; margin: 0 auto 18px; border-radius: 13px; box-shadow: 0 6px 16px rgba(232,118,58,.34); }
+.login__mark svg { width: 25px; height: 25px; }
+.login__title { font-size: 1.5rem; }
+.login__title b { color: var(--primary); font-weight: 600; }
+.login__sub { color: var(--muted); font-size: .9rem; margin: 10px 0 24px; line-height: 1.55; }
+.login__btn { gap: 10px; }
+.login__note { font-size: .76rem; color: var(--muted); margin: 16px 0 0; min-height: 1em; }
+.login__note.is-warn { color: var(--primary-strong); }
+
+/* ---------- Map graticule (fondo elegante del SVG) ---------- */
+.geo-graticule { stroke: #DCCDBA; stroke-width: .6; opacity: .5; }
+.geo-graticule--major { stroke: #D2C0A8; stroke-width: .8; opacity: .6; }
+
+/* ---------- Algorithms panel ---------- */
+.algos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 760px) { .algos { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .algos { grid-template-columns: 1fr; } }
+.algo {
+    position: relative; background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 15px 16px; min-height: 128px;
+    display: flex; flex-direction: column;
+}
+.algo.is-chosen { border-color: var(--primary); background: var(--primary-tint); box-shadow: 0 0 0 1px var(--primary) inset; }
+.algo__top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.algo__role { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.algo__name { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+.algo__name .cx { color: var(--muted); font-family: var(--font-mono); font-size: .72rem; font-weight: 500; }
+.algo__body { margin-top: auto; }
+.algo__main { font-family: var(--font-mono); font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; }
+.algo__main.profit { color: var(--primary-strong); }
+.algo__sub { font-size: .78rem; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+.algo__route { font-family: var(--font-mono); font-size: .76rem; color: var(--ink); margin-top: 5px; word-break: break-word; line-height: 1.5; }
+.algo__route .arrow { color: var(--primary); }
+.badge-chosen { position: absolute; top: 12px; right: 12px; background: var(--primary); color: #fff;
+    font-size: .64rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+.algo__time { font-size: .68rem; color: var(--muted); font-family: var(--font-mono); margin-top: 6px; }
+
+/* ---------- Selector de destino en la tarjeta de Dijkstra ---------- */
+.dij-pick { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.dij-pick__lbl { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); }
+.dij-select {
+    flex: 1; font-family: var(--font-mono); font-size: .8rem; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px;
+    padding: 5px 26px 5px 9px; appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%23E8763A' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 8px center;
+}
+.dij-select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }

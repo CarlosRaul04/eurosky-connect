@@ -35,6 +35,7 @@ app.get('/api/status', (_req, res) => {
     res.json({
         status: 'SUCCESS',
         message: 'Orquestador EuroSky Connect operativo.',
+        authEnabled: oauth.isConfigured(),
         auth: oauth.isConfigured() ? 'oauth-activo' : 'oauth-desactivado (modo prototipo)',
     });
 });

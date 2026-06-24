@@ -4,9 +4,16 @@
 // nunca llama al motor ni a Google Maps de calculo; solo consume estos endpoints.
 const API = (() => {
     const base = (window.EUROSKY_CONFIG && window.EUROSKY_CONFIG.apiBase) || '';
+    const TOKEN_KEY = 'eurosky_token';
+
+    const getToken = () => sessionStorage.getItem(TOKEN_KEY);
+    const setToken = (t) => sessionStorage.setItem(TOKEN_KEY, t);
+    const clearToken = () => sessionStorage.removeItem(TOKEN_KEY);
 
     async function request(path, { method = 'GET', body } = {}) {
         const opts = { method, headers: {} };
+        const token = getToken();
+        if (token) opts.headers.Authorization = `Bearer ${token}`;
         if (body !== undefined) {
             opts.headers['Content-Type'] = 'application/json';
             opts.body = JSON.stringify(body);
@@ -19,13 +26,22 @@ const API = (() => {
             const msg = (data && data.error) || `Error HTTP ${res.status}`;
             const err = new Error(msg);
             err.status = res.status;
-            err.payload = data; // puede traer el resultado (422) o detalles (400)
+            err.payload = data;
             throw err;
         }
         return data;
     }
 
     return {
+        // Sesion
+        getToken, setToken, clearToken,
+
+        // Estado / auth
+        status: () => request('/api/status'),
+        authLogin: () => request('/api/auth/login'),
+        authMe: () => request('/api/auth/me'),
+        authLogout: () => request('/api/auth/logout', { method: 'POST' }),
+
         // Aeropuertos
         listAirports: () => request('/api/aeropuertos'),
         createAirport: (a) => request('/api/aeropuertos', { method: 'POST', body: a }),

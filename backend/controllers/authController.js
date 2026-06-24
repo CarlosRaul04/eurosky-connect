@@ -13,10 +13,14 @@ async function login(_req, res, next) {
 async function callback(req, res, next) {
     try {
         const { code } = req.query;
-        const { sessionToken, user } = await authService.handleCallback(code);
-        // En un frontend real se redirige con el token; aqui lo devolvemos en JSON.
-        res.json({ sessionToken, user });
-    } catch (e) { next(e); }
+        const { sessionToken } = await authService.handleCallback(code);
+        // Redirige al frontend con el token en el fragmento (#): asi no viaja al
+        // servidor en peticiones posteriores ni queda en logs. El SPA lo captura.
+        res.redirect(`/#access=${sessionToken}`);
+    } catch (e) {
+        // Ante un fallo de OAuth, vuelve al frontend con un aviso en lugar de un JSON crudo.
+        res.redirect(`/#auth_error=${encodeURIComponent(e.message || 'oauth_failed')}`);
+    }
 }
 
 async function me(req, res) {

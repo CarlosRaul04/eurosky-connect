@@ -1,30 +1,120 @@
 // frontend/js/app.js
 //
-// Orquestacion de la interfaz: estado, navegacion, optimizacion y CRUD.
+// Orquestacion de la interfaz: sesion, navegacion, optimizacion y CRUD.
 // Toda comunicacion con el sistema pasa por el cliente REST (API).
 (() => {
     'use strict';
 
-    const state = { airports: [], aircraft: [], result: null };
+    const state = { airports: [], aircraft: [], result: null, authEnabled: false, appReady: false };
     const nf = new Intl.NumberFormat('es-ES');
     const nf2 = new Intl.NumberFormat('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const $ = (sel) => document.querySelector(sel);
 
-    // ------------------------------------------------------------------ init
-    document.addEventListener('DOMContentLoaded', async () => {
+    // ================================================================ arranque
+    document.addEventListener('DOMContentLoaded', () => {
         bindTabs();
         bindOptimize();
         bindCrudButtons();
         bindModal();
+        bindAuth();
+        bootstrap();
+    });
+
+    // Lee el token del fragmento (#access=...) tras volver de Google.
+    function readHash() {
+        if (!location.hash) return;
+        const params = new URLSearchParams(location.hash.slice(1));
+        if (params.get('access')) API.setToken(params.get('access'));
+        if (params.get('auth_error')) toast(`No se pudo iniciar sesión: ${params.get('auth_error')}`, 'err');
+        history.replaceState(null, '', location.pathname + location.search);
+    }
+
+    async function bootstrap() {
+        readHash();
+        let status;
+        try {
+            status = await API.status();
+        } catch {
+            showLogin();
+            return toast('No se pudo conectar con el servidor. ¿Está corriendo <b>npm start</b>?', 'err');
+        }
+        state.authEnabled = Boolean(status.authEnabled);
+
+        // Si hay token, validamos la sesion.
+        if (API.getToken()) {
+            try {
+                const { user } = await API.authMe();
+                if (user) return enterApp(user);
+            } catch { API.clearToken(); }
+        }
+        // Sin sesion valida: con OAuth activo pedimos login; sin el, entramos como invitado.
+        showLogin();
+    }
+
+    // ================================================================ sesion/UI
+    function bindAuth() {
+        $('#btn-login').addEventListener('click', onLogin);
+        $('#btn-logout').addEventListener('click', onLogout);
+    }
+
+    function showLogin() {
+        $('#app-shell').hidden = true;
+        $('#login-screen').hidden = false;
+        const note = $('#login-note');
+        note.textContent = state.authEnabled ? '' : 'Autenticación en modo desarrollo: entrarás como invitado.';
+        note.className = `login__note ${state.authEnabled ? '' : 'is-warn'}`;
+        $('#login-btn-text').textContent = state.authEnabled ? 'Continuar con Google' : 'Entrar (modo desarrollo)';
+    }
+
+    async function onLogin() {
+        if (!state.authEnabled) return enterApp(null); // modo invitado
+        try {
+            const { authUrl } = await API.authLogin();
+            window.location.href = authUrl; // redirige a Google
+        } catch (e) {
+            toast(e.message, 'err');
+        }
+    }
+
+    async function onLogout() {
+        try { await API.authLogout(); } catch { /* ignore */ }
+        API.clearToken();
+        location.reload();
+    }
+
+    async function enterApp(user) {
+        $('#login-screen').hidden = true;
+        $('#app-shell').hidden = false;
+        renderUser(user);
+        if (state.appReady) return;
         try {
             await loadData();
             const mode = await MapView.init('map', state.airports);
-            $('#map-mode').textContent = mode === 'google' ? 'Google Maps' : 'Red de aeropuertos';
+            $('#map-mode').textContent = mode === 'google' ? 'Google Maps' : 'Red europea';
+            state.appReady = true;
         } catch (e) {
-            toast(`No se pudo conectar con el servidor. ¿Está corriendo <b>npm start</b>?`, 'err');
+            toast('No se pudieron cargar los datos del servidor.', 'err');
         }
-    });
+    }
 
+    function renderUser(user) {
+        const chip = $('#user-chip');
+        chip.hidden = false; // el chip (y su botón de salir) siempre está visible
+        const avatar = $('#user-avatar');
+        if (user) {
+            $('#user-name').textContent = user.nombre || user.email || 'Usuario';
+            if (user.foto) { avatar.onerror = () => { avatar.style.display = 'none'; }; avatar.src = user.foto; avatar.style.display = ''; }
+            else { avatar.style.display = 'none'; }
+            $('#btn-logout').title = 'Cerrar sesión';
+        } else {
+            // Modo invitado: sin perfil de Google.
+            $('#user-name').textContent = 'Invitado';
+            avatar.style.display = 'none';
+            $('#btn-logout').title = state.authEnabled ? 'Salir' : 'Volver a la pantalla de acceso';
+        }
+    }
+
+    // ================================================================ datos
     async function loadData() {
         [state.airports, state.aircraft] = await Promise.all([API.listAirports(), API.listAircraft()]);
         fillSelect('#sel-aircraft', state.aircraft.map((a) => ({ v: a.modelo, t: a.modelo })));
@@ -34,11 +124,10 @@
     }
 
     function fillSelect(sel, items) {
-        const el = $(sel);
-        el.innerHTML = items.map((i) => `<option value="${i.v}">${i.t}</option>`).join('');
+        $(sel).innerHTML = items.map((i) => `<option value="${i.v}">${i.t}</option>`).join('');
     }
 
-    // ------------------------------------------------------------------ tabs
+    // ================================================================ tabs
     function bindTabs() {
         document.querySelectorAll('.tab').forEach((tab) => {
             tab.addEventListener('click', () => {
@@ -50,7 +139,7 @@
         });
     }
 
-    // -------------------------------------------------------------- optimize
+    // ================================================================ optimizar
     function bindOptimize() {
         $('#btn-optimize').addEventListener('click', runOptimization);
     }
@@ -73,26 +162,28 @@
             state.result = result;
             renderResult(result);
         } catch (err) {
-            // El backend devuelve 422 con el cuerpo del resultado si no hay ruta rentable.
-            if (err.payload && err.payload.status === 'NO_PROFITABLE_ROUTES') {
-                renderNoRoute(err.payload);
-            } else {
-                toast(err.message, 'err');
-            }
+            if (err.status === 401) return sessionExpired();
+            if (err.payload && err.payload.status === 'NO_PROFITABLE_ROUTES') renderNoRoute(err.payload);
+            else toast(err.message, 'err');
         } finally {
             btn.disabled = false;
             btn.textContent = 'Optimizar jornada';
         }
     }
 
+    function sessionExpired() {
+        toast('Tu sesión expiró. Vuelve a iniciar sesión.', 'err');
+        API.clearToken();
+        setTimeout(() => location.reload(), 1400);
+    }
+
     function renderResult(r) {
         const dfs = r.itineraries.dfsExact;
         const greedy = r.itineraries.greedy;
 
-        // Mapa
         MapView.drawItinerary(dfs.ruta);
 
-        // Status line
+        // Linea de estado en el panel
         const mc = r.demandSimulation;
         $('#statusline').hidden = false;
         $('#dot-mc').className = 'dot dot--off';
@@ -110,9 +201,22 @@
         $('#kpi-time').textContent = nf2.format(dfs.tiempoJornadaH);
         $('#kpi-legs').textContent = dfs.tramos.length;
 
-        // Itinerario + comparativa
-        $('#result-area').innerHTML = legsTable(dfs) + comparisonBlock(dfs, greedy);
+        // Itinerario + panel de algoritmos + comparativa
+        $('#result-area').innerHTML = legsTable(dfs) + algorithmsPanel(r) + comparisonBlock(dfs, greedy);
         requestAnimationFrame(() => animateBars(dfs, greedy));
+        bindDijkstraSelector();
+    }
+
+    // El selector de Dijkstra actualiza la tarjeta con datos ya recibidos (sin re-llamar al backend).
+    function bindDijkstraSelector() {
+        const sel = document.getElementById('dij-dest');
+        if (!sel || !state.result) return;
+        sel.addEventListener('change', () => {
+            const info = state.result.costReference.dijkstraFromOrigin[sel.value];
+            if (!info) return;
+            document.getElementById('dij-cost').textContent = '€' + nf.format(Math.round(info.costoEUR));
+            document.getElementById('dij-route').innerHTML = routeArrows(info.ruta);
+        });
     }
 
     function renderNoRoute(r) {
@@ -132,6 +236,7 @@
             </div></div></div>`;
     }
 
+    // -------- Itinerario optimo (tabla) --------
     function legsTable(dfs) {
         const rows = dfs.tramos.map((t) => `
             <tr>
@@ -151,7 +256,7 @@
                 <thead><tr><th>Tramo</th><th class="num">Pax</th><th class="num">Tiempo (h)</th><th class="num">Costo €</th><th class="num">Beneficio €</th></tr></thead>
                 <tbody>${rows}
                     <tr class="total">
-                        <td>Total · ${dfs.ruta.join(' → ')}</td>
+                        <td>Total · ${routeArrows(dfs.ruta)}</td>
                         <td class="num">—</td>
                         <td class="num">${nf2.format(dfs.tiempoJornadaH)}</td>
                         <td class="num">${nf.format(Math.round(dfs.costoTotalEUR))}</td>
@@ -162,6 +267,87 @@
         </div>`;
     }
 
+    // -------- Panel: como lo resolvio cada algoritmo --------
+    function algorithmsPanel(r) {
+        const mc = r.demandSimulation;
+        const bfs = r.connectivity;
+        const dij = r.costReference.dijkstraFromOrigin || {};
+        const floyd = r.costReference.floydWarshall || {};
+        const greedy = r.itineraries.greedy;
+        const dfs = r.itineraries.dfsExact;
+        const cityOf = Object.fromEntries(state.airports.map((a) => [a.iata, a.ciudad]));
+
+        // Dijkstra: lista de destinos con su ruta minima. Por defecto mostramos
+        // el destino con mas escalas (mas ilustrativo); el usuario puede cambiarlo.
+        const dijList = Object.entries(dij)
+            .map(([iata, info]) => ({ iata, ...info }))
+            .sort((a, b) => a.iata.localeCompare(b.iata));
+        const dijDefault = dijList.length
+            ? dijList.slice().sort((a, b) => b.ruta.length - a.ruta.length || a.costoEUR - b.costoEUR)[0]
+            : null;
+
+        const card = (role, name, cx, bodyHtml, opts = {}) => `
+            <div class="algo ${opts.chosen ? 'is-chosen' : ''}">
+                ${opts.chosen ? '<span class="badge-chosen">Elegido</span>' : ''}
+                <div class="algo__top"><span class="algo__role">${role}</span></div>
+                <div class="algo__name">${name} ${cx ? `<span class="cx">${cx}</span>` : ''}</div>
+                <div class="algo__body">${bodyHtml}</div>
+                ${opts.ms !== undefined ? `<div class="algo__time">${nf2.format(opts.ms)} ms</div>` : ''}
+            </div>`;
+
+        const cards = [
+            card('Simulación', 'Monte Carlo', '', `
+                <div class="algo__main">${mc.feasibleEdges} rutas</div>
+                <div class="algo__sub">${mc.discardedEdges} descartadas por ocupación &lt; umbral</div>`,
+                { ms: mc.execMs }),
+
+            card('Conectividad', 'BFS', 'O(V+E)', `
+                <div class="algo__main">${bfs.reachableFromOrigin.length} alcanzables</div>
+                <div class="algo__sub">${bfs.allReachable ? 'Red totalmente conectada' : 'Red parcialmente conectada'}</div>`,
+                { ms: bfs.execMs }),
+
+            card('Costo mínimo', 'Dijkstra', 'O((V+E)·logV)', dijDefault ? `
+                <div class="dij-pick">
+                    <span class="dij-pick__lbl">${r.origin} →</span>
+                    <select id="dij-dest" class="dij-select" aria-label="Destino para Dijkstra">
+                        ${dijList.map((d) => `<option value="${d.iata}" ${d.iata === dijDefault.iata ? 'selected' : ''}>${d.iata} · ${cityOf[d.iata] || d.iata}</option>`).join('')}
+                    </select>
+                </div>
+                <div id="dij-cost" class="algo__main">€${nf.format(Math.round(dijDefault.costoEUR))}</div>
+                <div class="algo__sub">costo mínimo · ruta:</div>
+                <div id="dij-route" class="algo__route">${routeArrows(dijDefault.ruta)}</div>`
+                : `<div class="algo__main">—</div><div class="algo__sub">sin destinos alcanzables</div>`,
+                { ms: r.costReference.dijkstraExecMs }),
+
+            card('Todos los pares', 'Floyd-Warshall', 'O(V³)', `
+                <div class="algo__main">${floyd.nodos || '—'}×${floyd.nodos || '—'}</div>
+                <div class="algo__sub">costos mínimos entre todos los aeropuertos · alimenta la poda del DFS</div>`,
+                { ms: floyd.execMs }),
+
+            card('Itinerario heurístico', 'Greedy', '', `
+                <div class="algo__main profit">€${nf.format(Math.round(greedy.beneficioTotalEUR))}</div>
+                <div class="algo__sub">${greedy.tramos.length} tramos · ${nf2.format(greedy.tiempoJornadaH)} h</div>
+                <div class="algo__route">${routeArrows(greedy.ruta)}</div>`,
+                { ms: greedy.execMs }),
+
+            card('Itinerario óptimo', 'DFS', 'backtracking', `
+                <div class="algo__main profit">€${nf.format(Math.round(dfs.beneficioTotalEUR))}</div>
+                <div class="algo__sub">${dfs.tramos.length} tramos · ${nf2.format(dfs.tiempoJornadaH)} h · ${nf.format(dfs.nodosExplorados)} nodos</div>
+                <div class="algo__route">${routeArrows(dfs.ruta)}</div>`,
+                { ms: dfs.execMs, chosen: true }),
+        ].join('');
+
+        return `
+        <div class="section">
+            <div class="section__head">
+                <h3>Cómo lo resolvió cada algoritmo</h3>
+                <span class="card__hint">Cada uno aporta una pieza distinta; el DFS entrega el itinerario elegido</span>
+            </div>
+            <div class="algos">${cards}</div>
+        </div>`;
+    }
+
+    // -------- Comparativa DFS vs Greedy --------
     function comparisonBlock(dfs, greedy) {
         const gap = dfs.beneficioTotalEUR > 0
             ? Math.round((1 - greedy.beneficioTotalEUR / dfs.beneficioTotalEUR) * 100) : 0;
@@ -196,21 +382,23 @@
         });
     }
 
+    function routeArrows(route) {
+        return route.join('<span class="arrow"> → </span>');
+    }
+
     function countTo(sel, target) {
         const el = $(sel);
         const dur = 650, t0 = performance.now(), end = Math.round(target);
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduce) { el.textContent = nf.format(end); return; }
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = nf.format(end); return; }
         function step(now) {
             const k = Math.min((now - t0) / dur, 1);
-            const eased = 1 - Math.pow(1 - k, 3);
-            el.textContent = nf.format(Math.round(end * eased));
+            el.textContent = nf.format(Math.round(end * (1 - Math.pow(1 - k, 3))));
             if (k < 1) requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
     }
 
-    // ------------------------------------------------------------------ CRUD
+    // ================================================================ CRUD
     function bindCrudButtons() {
         $('#btn-add-airport').addEventListener('click', () => openAirportModal());
         $('#btn-add-aircraft').addEventListener('click', () => openAircraftModal());
@@ -223,7 +411,7 @@
         try {
             const info = await API.refreshMaps();
             toast(`Distancias actualizadas · ${info.pares} rutas (${info.modo}).`, 'ok');
-        } catch (e) { toast(e.message, 'err'); }
+        } catch (e) { handle(e); }
         finally { btn.disabled = false; btn.textContent = 'Recalcular distancias'; }
     }
 
@@ -313,7 +501,7 @@
             toast(`${iata} eliminado.`, 'ok');
             await loadData();
             MapView.setAirports(state.airports);
-        } catch (e) { toast(e.message, 'err'); }
+        } catch (e) { handle(e); }
     }
 
     // -------- Aircraft modal --------
@@ -353,10 +541,10 @@
             await API.deleteAircraft(modelo);
             toast(`${modelo} eliminado.`, 'ok');
             await loadData();
-        } catch (e) { toast(e.message, 'err'); }
+        } catch (e) { handle(e); }
     }
 
-    // ------------------------------------------------------------------ modal
+    // ================================================================ modal
     let modalSubmit = null;
     function bindModal() {
         document.querySelectorAll('[data-close-modal]').forEach((b) => b.addEventListener('click', closeModal));
@@ -369,6 +557,7 @@
             submitBtn.disabled = true;
             try { await modalSubmit(values); closeModal(); }
             catch (err) {
+                if (err.status === 401) { closeModal(); return sessionExpired(); }
                 const det = err.payload && err.payload.detalles;
                 toast(det ? det[0] : err.message, 'err');
             } finally { submitBtn.disabled = false; }
@@ -397,7 +586,12 @@
         modalSubmit = null;
     }
 
-    // ------------------------------------------------------------------ toast
+    // ================================================================ utils
+    function handle(err) {
+        if (err.status === 401) return sessionExpired();
+        toast(err.message, 'err');
+    }
+
     function toast(html, kind = 'ok') {
         const el = document.createElement('div');
         el.className = `toast toast--${kind}`;
